@@ -26,6 +26,6 @@ def writePacket(cmd, parameter, deviceID = deviceID):
 
 result = writePacket(0x12, 1)
 
-print result
+print(result)
 
 
