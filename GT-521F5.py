@@ -25,7 +25,7 @@ def writePacket(cmd, parameter, deviceID):
 	return result
 
 
-def receivedPacket(packet):
+# def receivedPacket(packet):
 	
 
 # result = writePacket(cmd, ID, deviceID)
