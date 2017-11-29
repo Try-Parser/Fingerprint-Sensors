@@ -19,8 +19,8 @@ packet = bytearray(struct.pack(comm_struct(), 0x55, 0xAA, deviceID, ID, cmd))
 checksum = sum(packet)
 packet += bytearray(struct.pack(checksum_struct(), checksum))
 
-result = len(packet) == serial.write(packet)
-serial.flush()
+result = len(packet) == ser.write(packet)
+ser.flush()
 
 print(result)
 
