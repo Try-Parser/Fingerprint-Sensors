@@ -4,7 +4,7 @@ import struct
 
 global ser
 
-ser = serial.serial('/dev/ttyAMA0', baudrate=57600, timeout=5.0)
+ser = serial.Serial('/dev/ttyAMA0', baudrate=57600, timeout=5.0)
 
 cmd = 0x22
 ID = 1
