@@ -14,8 +14,8 @@ cmd = 0x22
 ID = 1
 deviceID = 0x01
 
-def writePacket(cmd, parameter, deviceID = deviceID):
-	packet = bytearray(struct.pack(comm_struct(), 0x55, 0xAA, deviceID, ID, cmd))
+def writePacket(cmd, param, deviceID = deviceID):
+	packet = bytearray(struct.pack(comm_struct(), 0x55, 0xAA, deviceID, param, cmd))
 	checksum = sum(packet)
 	packet += bytearray(struct.pack(checksum_struct(), checksum))
 
@@ -24,7 +24,7 @@ def writePacket(cmd, parameter, deviceID = deviceID):
 
 	return result
 
-result = writePacket(0x12, 0x0)
+result = writePacket(0x12, False)
 
 print(result)
 
