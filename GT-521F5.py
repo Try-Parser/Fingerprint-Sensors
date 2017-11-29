@@ -8,7 +8,7 @@ comm_struct = lambda: '<BBHIH'
 data_struct = lambda x: '<BBH' + str(x) + 's'
 checksum_struct = lambda: '<H'
 
-ser = serial.Serial('/dev/ttyAMA0', baudrate=57600, timeout=5.0)
+ser = serial.Serial('/dev/ttyAMA0', baudrate=57600, timeout=2)
 
 cmd = 0x22
 ID = 1
@@ -98,7 +98,7 @@ def receivedPacket(response_len = 12):
 
 # result = writePacket(cmd, ID, deviceID)
 
-if writePacket(0x22, 0x00):
+if writePacket(0x01, 0x00):
 	result = receivedPacket()
 
 	print (result)
