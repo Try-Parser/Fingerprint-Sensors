@@ -14,13 +14,20 @@ cmd = 0x22
 ID = 1
 deviceID = 0x01
 
-packet = bytearray(struct.pack(comm_struct(), 0x55, 0xAA, deviceID, ID, cmd))
+def writePacket(cmd, parameter, deviceID):
+	packet = bytearray(struct.pack(comm_struct(), 0x55, 0xAA, deviceID, ID, cmd))
+	checksum = sum(packet)
+	packet += bytearray(struct.pack(checksum_struct(), checksum))
 
-checksum = sum(packet)
-packet += bytearray(struct.pack(checksum_struct(), checksum))
+	result = len(packet) == ser.write(packet)
+	ser.flush()
 
-result = len(packet) == ser.write(packet)
-ser.flush()
+	return result
 
-print(result)
 
+def receivedPacket(packet):
+	
+
+# result = writePacket(cmd, ID, deviceID)
+
+result = writePacket(0x51)
