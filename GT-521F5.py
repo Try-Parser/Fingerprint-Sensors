@@ -30,7 +30,7 @@ def writePacket(cmd, param, deviceID = deviceID):
 	return result
 
 def receivedPacket(packetLn = 12):
-	rxPacket = ser.serial.read(packetLn)
+	rxPacket = ser.read(packetLn)
 	print(rxPacket)
 
 
