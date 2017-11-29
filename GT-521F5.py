@@ -98,7 +98,7 @@ def receivedPacket(response_len = 12):
 
 # result = writePacket(cmd, ID, deviceID)
 
-if writePacket(0x51, 0x00):
+if writePacket(0x22, 0x00):
 	result = receivedPacket()
 
 	print (result)
