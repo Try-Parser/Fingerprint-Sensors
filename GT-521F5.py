@@ -8,6 +8,11 @@ comm_struct = lambda: '<BBHIH'
 data_struct = lambda x: '<BBH' + str(x) + 's'
 checksum_struct = lambda: '<H'
 
+Data_Start_Code_2 = 0x5A
+Data_Start_Code_2 = 0xA5
+CMD_Code_1 = 0x55
+CMD_Code_2 = 0xAA
+
 ser = serial.Serial('/dev/ttyAMA0', baudrate=9600, timeout=2)
 
 cmd = 0x22
@@ -24,8 +29,12 @@ def writePacket(cmd, param, deviceID = deviceID):
 
 	return result
 
-result = writePacket(0x12, 1)
+def receivedPacket(packetLn = 12):
+	rxPacket = ser.serial.read(packetLn)
+	print(rxPacket)
 
-print(result)
 
+result = writePacket(0x01, 1)
 
+if result:
+	receivedPacket()
