@@ -114,7 +114,7 @@ class GTSensor:
 	def receivedData(self, packetLength):
 		rxPacket = self.serial.read(1+1+2+packetLength+2)
 
-		return self.decode_data(bytearray(response))
+		return self.decode_data(bytearray(rxPacket))
 
 	def writeData(self, data, packetLength):
 		txPacket = self.encode_data(data, packetLength, GT521F5.OPEN.value)
