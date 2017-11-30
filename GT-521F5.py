@@ -34,6 +34,7 @@ def receivedPacket(packetLn = 12):
 		print("aw")
 
 	rxPacket = ser.read(packetLn)
+	print(rxPacket)
 
 
 result = writePacket(0x1F4, 500)
