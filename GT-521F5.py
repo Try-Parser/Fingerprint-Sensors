@@ -30,9 +30,10 @@ def writePacket(cmd, param, deviceID = deviceID):
 	return result
 
 def receivedPacket(packetLn = 12):
+	while not ser.readable():
+		print("aw")
+
 	rxPacket = ser.read(packetLn)
-	time.sleep(1)
-	print(rxPacket)
 
 
 result = writePacket(0x1F4, 500)
