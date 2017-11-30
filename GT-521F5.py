@@ -36,6 +36,12 @@ def receivedPacket(packetLn = 12):
 	rxPacket = ser.read(packetLn)
 	print(rxPacket)
 
+def onLED(tf):
+	result = writePacket(tf*1)
+
+	if result:
+		receivedPacket()
+
 
 # ser.timeout = 10
 
@@ -54,8 +60,10 @@ if result:
 
 time.sleep(0.5)
 
-_ = input("Press Enter to continue...")
+onLED(True)
 
+_ = input("Press Enter to continue...")
+ser.timeout = 10
 result = writePacket(0x60, 0x01)
 
 if result:
