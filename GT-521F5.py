@@ -65,5 +65,6 @@ result = writePacket(0x60, 0x01)
 
 if result:
 	receivedPacket()
+	ser.timeout = 5
 
 onLED(False)
