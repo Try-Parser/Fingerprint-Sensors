@@ -82,7 +82,7 @@ class GT521F5(Enum):
 
     COMM_STRUCT                 = lambda: '<BBHIH'
     DATA_STRUCT                 = lambda x: '<BBH' + str(x) + 's'
-    CHECK_SUM                   = lambda: '<H'
+    CHECK_SUM_STRUCT            = lambda: '<H'
     ACK                         = 0x30
     NACK                        = 0x31
 

@@ -36,7 +36,7 @@ class GTSensor:
 	def writePacket(self, cmd, param):
 		packet = bytearray(struct.pack(GT521F5.COMM_STRUCT(), 0x55, 0xAA, self.address, param, cmd))
 		checksum = sum(packet)
-		packet += bytearray(struct.pack(GT521F5.CHECKSUM_STRUCT(), checksum))
+		packet += bytearray(struct.pack(GT521F5.CHECK_SUM_STRUCT(), checksum))
 
 		result = len(packet) == self.serial.write(packet)
 		self.serial.flush()
@@ -59,7 +59,7 @@ class GTSensor:
 		if rxPacket[0] == GT521F5.CMD_DATA_1.value and rxPacket[1] == GT521F5T.CMD_DATA_2.value:
 			return self.decode_data(rxPacket)
 
-		checksum = sum(struct.unpack(CHECKSUM_STRUCT(), rxPacket[-2:]))
+		checksum = sum(struct.unpack(CHECK_SUM_STRUCT(), rxPacket[-2:]))
 		rxPacket = rxPacket[:-2]
 		response['Checksum'] = sum(rxPacket) == checksum
 
@@ -108,7 +108,7 @@ class GTSensor:
 		])
 
 		checksum = sum(txPacket)
-		txPacket += bytearray(struct.pack(GT521F5.CHECKSUM_STRUCT(), checksum))
+		txPacket += bytearray(struct.pack(GT521F5.CHECK_SUM_STRUCT(), checksum))
 		return txPacket
 
 	def receivedData(self, packetLength):
