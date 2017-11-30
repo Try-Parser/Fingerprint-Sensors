@@ -31,6 +31,7 @@ def writePacket(cmd, param, deviceID = deviceID):
 
 def receivedPacket(packetLn = 12):
 	rxPacket = ser.read(packetLn)
+	time.sleep(0.5)
 	print(rxPacket)
 
 
