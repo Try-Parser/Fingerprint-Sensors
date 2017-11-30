@@ -60,8 +60,10 @@ time.sleep(0.5)
 onLED(True)
 
 _ = input("Press Enter to continue...")
-ser.timeout = 5
+ser.timeout = 10
 result = writePacket(0x60, 0x01)
 
 if result:
 	receivedPacket()
+
+onLED(False)
