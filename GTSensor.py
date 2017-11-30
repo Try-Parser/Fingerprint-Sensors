@@ -151,7 +151,7 @@ class GTSensor:
 		if hd:
 			self.serial.timeout = 10
 
-		if self.writePacket(GT521F5.CAPTURE_IMAGE.value, hd*1)
+		if self.writePacket(GT521F5.CAPTURE_IMAGE.value, hd*1):
 			self.serial.timeout = self.usb_timeout
 			return self.receivedPacket()
 		else:
