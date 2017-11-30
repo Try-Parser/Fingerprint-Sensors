@@ -37,7 +37,7 @@ def receivedPacket(packetLn = 12):
 	print(rxPacket)
 
 
-result = writePacket(0x1F4, 500)
+result = writePacket(0x60, 0x0)
 
 if result:
 	receivedPacket()
