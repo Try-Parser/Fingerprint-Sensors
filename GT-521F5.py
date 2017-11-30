@@ -57,6 +57,7 @@ if result:
 	receivedPacket()
 time.sleep(0.5)
 
+
 onLED(True)
 
 _ = input("Press Enter to continue...")
@@ -77,6 +78,6 @@ result = writePacket(0x61, 0x00)
 ser.timeout = 10
 
 if result:
-	rxPacket = ser.read(1+1+2+500+2)
+	rxPacket = ser.read(1+1+2+498+2)
 	ser.timeout = 5
 	print (rxPacket)

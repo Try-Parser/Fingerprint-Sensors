@@ -33,28 +33,30 @@ OFFSET  ITEM        TYPE    DESCRIPTION
 from enum import Enum
 
 class GT521F5(Enum):
-    OPEN                = 0x01
-    CLOSE               = 0x02
-    USB_INTERNAL_CHECK  = 0x03
-    SET_BAUDRATE        = 0x04
-    SET_AIP_MODE        = 0x05
-    CMOS_LED            = 0x12
+    OPEN                       = 0x01
+    CLOSE                      = 0x02
+    USB_INTERNAL_CHECK         = 0x03
+    SET_BAUDRATE               = 0x04
+    SET_AIP_MODE               = 0x05
+    CMOS_LED                   = 0x12
 
-    GET_ENROLL_COUNT    = 0x20
-    CHECK_ENROLLED      = 0x21
-    START_ENROLL        = 0x22
-    FIRST_ENROLL        = 0x23
-    SECOND_ENROLL       = 0x24
-    THIRD_MATCH_SAVE    = 0x25
+    GET_ENROLL_COUNT           = 0x20
+    CHECK_ENROLLED             = 0x21
+    START_ENROLL               = 0x22
+    FIRST_ENROLL               = 0x23
+    SECOND_ENROLL              = 0x24
+    THIRD_MATCH_SAVE           = 0x25
 
-    DELETE_FP_ID        = 0x40
-    DELETE_FP_ALL       = 0x41
+    DELETE_FP_ID               = 0x40
+    DELETE_FP_ALL              = 0x41
 
-    DETECT_FINGER       = 0x26
-    CAPTURE_IMAGE       = 0x60
-    MAKE_TEMPLATE       = 0x61
-    GET_TEMPLATE        = 0x70
-    SET_TEMPLATE        = 0x71
+    DETECT_FINGER              = 0x26
+    CAPTURE_IMAGE              = 0x60
+    MAKE_TEMPLATE              = 0x61
+    GET_TEMPLATE               = 0x70
+    SET_TEMPLATE               = 0x71
+    IDENTIFY_TEMPLATE          = 0xF4
+    IDENTIFY_TEMPLATE_PARAM    = 0x1F4
 
     # Error Response 
     NACK_TIMEOUT               = 0x1001 # (Obsolete) Capture timeout
@@ -78,11 +80,11 @@ class GT521F5(Enum):
     NACK_FINGER_IS_NOT_PRESSED = 0x1012 # Finger is not pressed
 
 
-    comm_struct                 = lambda: '<BBHIH'
-    data_struct                 = lambda x: '<BBH' + str(x) + 's'
-    checksum_struct             = lambda: '<H'
-    Ack                         = 0x30
-    Nack                        = 0x31
+    COMM_STRUCT                 = lambda: '<BBHIH'
+    DATA_STRUCT                 = lambda x: '<BBH' + str(x) + 's'
+    CHECK_SUM                   = lambda: '<H'
+    ACK                         = 0x30
+    NACK                        = 0x31
 
     CMD_STRT_1                  = 0x55
     CMD_STRT_2                  = 0xAA
