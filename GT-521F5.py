@@ -37,11 +37,11 @@ def receivedPacket(packetLn = 12):
 	print(rxPacket)
 
 
-ser.timeout = 10
+# ser.timeout = 10
 
-result = writePacket(0x60, 1)
+result = writePacket(0x01, 0x0)
 
-ser.timeout = 5
+# ser.timeout = 5
 
 if result:
 	receivedPacket()
