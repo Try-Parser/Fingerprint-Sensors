@@ -39,7 +39,7 @@ def receivedPacket(packetLn = 12):
 
 ser.timeout = 10
 
-result = writePacket(0x60, 0x0)
+result = writePacket(0x60, 1)
 
 ser.timeout = 5
 
