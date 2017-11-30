@@ -2,7 +2,6 @@ import serial
 import struct
 from GTEnum import GT521F5
 
-
 class GTSensor:
 	def __init__(
 			self, 
