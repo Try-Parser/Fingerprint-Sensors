@@ -34,7 +34,7 @@ class GTSensor:
 			exit(1)
 
 	def writePacket(self, cmd, param):
-		packet = bytearray(struct.pack(comm_struct(), 0x55, 0xAA, self.address, param, cmd))
+		packet = bytearray(struct.pack(GT521F5.COMM_STRUCT(), 0x55, 0xAA, self.address, param, cmd))
 		checksum = sum(packet)
 		packet += bytearray(struct.pack(checksum_struct(), checksum))
 
