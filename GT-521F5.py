@@ -51,9 +51,9 @@ if result:
 time.sleep(0.5)
 
 
-result = writePacket(0x04, 9600)
+result = writePacket(0x04, 57600)
 if result:
-	# ser.baudrate = 57600
+	ser.baudrate = 57600
 	receivedPacket()
 time.sleep(0.5)
 
