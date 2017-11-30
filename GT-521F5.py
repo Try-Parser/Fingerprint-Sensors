@@ -37,7 +37,7 @@ def receivedPacket(packetLn = 12):
 	print(rxPacket)
 
 def onLED(tf):
-	result = writePacket(tf*1)
+	result = writePacket(0x12, tf*1)
 
 	if result:
 		receivedPacket()
