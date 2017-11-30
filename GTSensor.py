@@ -71,11 +71,11 @@ class GTSensor:
 			'Checksum'	: None
 		}
 
-		if response == '':
+		if rxPacket == '':
 			response['ACK'] = False
 			return response
 
-		if rxPacket[0] == GT521F5.CMD_DATA_1.value and GT521F5.CMD_DATA_2.value:
+		if rxPacket[0] == GT521F5.CMD_DATA_1.value and rxPAcket[1] == GT521F5.CMD_DATA_2.value:
 			return self.decode_command(rxPacket)
 
 		checksum = sum(struct.unpack(GT521F5.COMM_STRUCT(), rxPacket[-2:]))
