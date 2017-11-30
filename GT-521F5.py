@@ -39,9 +39,24 @@ def receivedPacket(packetLn = 12):
 
 # ser.timeout = 10
 
-result = writePacket(0x60, 0x0)
+result = writePacket(0x01, 0x0)
 
-# ser.timeout = 5
+if result:
+	receivedPacket()
+
+time.sleep(0.5)
+
+
+result = writePacket(0x04, 57600)
+
+if result:
+	receivedPacket()
+
+time.sleep(0.5)
+
+_ = input("Press Enter to continue...")
+
+result = writePacket(0x60, 0x01)
 
 if result:
 	receivedPacket()
