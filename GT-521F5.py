@@ -13,7 +13,7 @@ Data_Start_Code_2 = 0xA5
 CMD_Code_1 = 0x55
 CMD_Code_2 = 0xAA
 
-ser = serial.Serial('/dev/ttyAMA0', baudrate=57600, timeout=2)
+ser = serial.Serial('/dev/ttyAMA0', baudrate=9600, timeout=2)
 
 cmd = 0x22
 ID = 1
