@@ -46,24 +46,21 @@ def onLED(tf):
 # ser.timeout = 10
 
 result = writePacket(0x01, 0x0)
-
 if result:
 	receivedPacket()
-
 time.sleep(0.5)
 
 
-result = writePacket(0x04, 57600)
-
+result = writePacket(0x04, 9600)
 if result:
+	# ser.baudrate = 57600
 	receivedPacket()
-
 time.sleep(0.5)
 
 onLED(True)
 
 _ = input("Press Enter to continue...")
-ser.timeout = 10
+ser.timeout = 5
 result = writePacket(0x60, 0x01)
 
 if result:
