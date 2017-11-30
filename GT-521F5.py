@@ -68,3 +68,15 @@ if result:
 	ser.timeout = 5
 
 onLED(False)
+
+
+print ("Generating Template..")
+
+result = writePacket(0x61, 0x00)
+
+ser.timeout = 10
+
+if result:
+	rxPacket = ser.read(1+1+2+500+2)
+	ser.timeout = 5
+	print (rxPacket)
