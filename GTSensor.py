@@ -123,7 +123,7 @@ class GTSensor:
 
 	def writeData(self, data, packetLength):
 		txPacket = self.encode_data(data, packetLength, GT521F5.OPEN.value)
-		result = len(packet) == self.serial.write(txPacket)
+		result = len(txPacket) == self.serial.write(txPacket)
 		self.serial.flush()
 		return result
 
@@ -203,7 +203,7 @@ class GTSensor:
 		else:
 			raise RuntimeError("Couldn't send packet.")
 
-		if self.writeData("\x01\x01" + template.decode("utf-8", "replace"), 500):
+		if self.writeData(b"\x01\x01" + template, 500):
 			data = self.receivedPacket()
 		else:
 			raise RuntimeError("Couldn't send packet (data)")
