@@ -51,6 +51,8 @@ class App:
 			
 			if self.sensor.senseFinger()[0]['Parameter'] == 0:
 				procced = True
+
+			print(procced)
 			
 			if procced:
 				print ("Capturing Fingerprint")
