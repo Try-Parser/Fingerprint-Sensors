@@ -63,6 +63,7 @@ class App:
 
 				self.sensor.LED(False)
 				self.sensor.close()
+				break
 
 app=App()
 app.enroll()
