@@ -34,6 +34,7 @@ from enum import Enum
 
 class GT521F5(Enum):
     # Command
+    DEFAULT                    = 0x00
     OPEN                       = 0x01
     CLOSE                      = 0x02
     USB_INTERNAL_CHECK         = 0x03
