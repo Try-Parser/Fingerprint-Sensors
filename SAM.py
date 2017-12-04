@@ -44,12 +44,15 @@ class App:
 	def enroll(self):
 		__id__ = input("Enter ID : ")
 		while True:
+			procced = False
 			if not __id__.isdigit():
 				print("Please Enter number")
 				self.enroll()
-			elif self.sensor.senseFinger()[0]['Parameter'] == 4114:
-				pass
-			else:
+			
+			if self.sensor.senseFinger()[0]['Parameter'] == 0:
+				procced = True
+			
+			if procced:
 				print ("Capturing Fingerprint")
 				self.sensor.LED(True)
 				time.sleep(0.1)
