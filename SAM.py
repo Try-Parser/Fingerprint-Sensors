@@ -40,10 +40,10 @@ class App:
 		time.sleep(0.1)
 		print ("Please put your finger on the sensor.")
 
-		if __capture_the_lights__(__id__):
+		if self.__capture_the_lights__(__id__):
 			template = self.sensor.genTemplate()
 
-			if __capture_the_lights__(__id__):
+			if self.__capture_the_lights__(__id__):
 				confirmation = self.sensor.indentify(template[1]['Data'])
 				print (confirmation)
 		else:
