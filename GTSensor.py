@@ -105,6 +105,7 @@ class GTSensor:
 		return self.decode_command(rxPacket)
 
 	def encode_data(self, data, length, address):
+		pint(data)
 		txPacket = bytearray([
 			GT521F5.CMD_DATA_1.value,
 			GT521F5.CMD_DATA_2.value,
