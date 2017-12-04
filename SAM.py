@@ -18,12 +18,9 @@ class App:
 		time.sleep(0.5)
 		self.sensor.LED(False)
 
-	def __capture_the_lights__(self, idx): 
+	def __capture_the_lights__(self): 
 		while True:
 			procced = False
-			if not idx.isdigit():
-				print("Please Enter a number")
-				return False
 
 			if self.sensor.senseFinger()[0]['Parameter'] == 0:
 				procced = True
@@ -34,51 +31,43 @@ class App:
 				if self.sensor.captureFinger(True)['ACK']:
 					return True				
 
+
 	def enroll(self):
 		__id__ = input("Enter ID : ")
 		self.sensor.LED(True)
 		time.sleep(0.1)
 		print ("Please put your finger on the sensor.")
 
-		if self.__capture_the_lights__(__id__):
-			template = self.sensor.genTemplate()
-			print(template[0])
-			print(template[1])
+		if __id__.isdigit(): 
+			if self.__capture_the_lights__():
+				template = self.sensor.genTemplate()
+				print(template[0])
+				print(template[1])
 
-			if self.__capture_the_lights__(__id__):
-				confirmation = self.sensor.indentify(template[1]['Data'])
-				print (confirmation)
+				time.sleep(0.2)
+				if self.__capture_the_lights__():
+					confirmation = self.sensor.indentify(template[1]['Data'])
+					print (confirmation)
+
+					#logical process
+			else:
+				self.enroll()
 		else:
+			print ("Please Enter number only!")
 			self.enroll()
-
-
-
-		# while True:
-		# 	procced = False
-		# 	if not __id__.isdigit():
-		# 		print("Please Enter number")
-		# 		self.enroll()
-
-		# 	if self.sensor.senseFinger()[0]['Parameter'] == 0:
-		# 		procced = True
-			
-		# 	if procced:
-		# 		print ("Capturing Fingerprint")
-		# 		time.sleep(0.1)
-		# 		captureResponse = self.sensor.captureFinger(True)
-		# 		print (captureResponse)
-				
-		# 		time.sleep(0.2)
-		# 		print ("Generating template")
-		# 		template = self.sensor.genTemplate()
-
-		# 		print(template)
-		# 		break
 
 		print ("terminitation")
 		self.sensor.LED(False)
 		self.sensor.close()
 		exit(1)
+
+	def scanLoop(self):
+		if self.__capture_the_lights__():
+			template = self.sensor.genTemplate()
+			print(template)
+
+
+
 
 
 app=App()
