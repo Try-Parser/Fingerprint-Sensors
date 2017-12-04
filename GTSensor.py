@@ -1,6 +1,7 @@
 import serial
 import struct
 from GTEnum import GT521F5
+import logging
 
 class GTSensor:
 	def __init__(
@@ -56,6 +57,7 @@ class GTSensor:
 		response['Checksum'] = sum(rxPacket) == checksum
 
 	def decode_data(self, rxPacket):
+		print(rxPacket)
 		response = {
 			'Header'	: None,
 			'DeviceID'	: None,

@@ -7,14 +7,14 @@ class App:
 
 		_initialization_response = self.sensor.initialize(True)
 		time.sleep(0.5)
-		self.sensor.LED(True)
-		print(_initialization_response)
-		self.sensor.LED(False)
+		# self.sensor.LED(True)
+		# print(_initialization_response)
+		# self.sensor.LED(False)
 
 		time.sleep(0.5)
-		self.sensor.LED(True)
 		print ("Setting baudrate from 9600 to 57600")
 		baudrateResult = self.sensor.setBaudrate(56700)
+		self.sensor.LED(True)
 		print(baudrateResult)
 		self.sensor.LED(False)
 
