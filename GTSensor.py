@@ -61,7 +61,7 @@ class GTSensor:
 		except Exception as e:
 			raise Exception(str(e) + ' ' + str(rxPacket[0]))
 
-		print(rxPacket[0][2:])
+		print(hex(rxPacket[0]))
 
 		# response['Header'] = hex(rxPacket[0])[2:] + hex(rxPacket[1])[2:]
 		# response['DeviceID'] = hex(rxPacket[2])[2:]
