@@ -113,6 +113,7 @@ class GTSensor:
 		])
 
 		checksum = sum(txPacket)
+		print (checksum)
 		txPacket += bytearray(struct.pack(GT521F5.CHECK_SUM_STRUCT(), checksum))
 		return txPacket
 
