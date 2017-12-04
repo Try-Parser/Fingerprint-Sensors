@@ -128,6 +128,12 @@ class GTSensor:
 		self.serial.timeout = self.usb_timeout
 		return [rxPacket, data]
 
+	def close(self):
+		if self.writePacket(GT521F5.CLOSE.value):
+			return self.receivedPacket()
+		else:
+			raise RuntimeError("Couldn't send packet.")
+
 	def LED(self, on):
 		if self.writePacket(GT521F5.CMOS_LED.value, on*1):
 			return self.receivedPacket()

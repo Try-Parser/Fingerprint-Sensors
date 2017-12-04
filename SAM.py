@@ -18,6 +18,9 @@ class App:
 		self.sensor.LED(True)
 		print(baudrateResult)
 		time.sleep(0.5)
+		self.sensor.close()
+		rxPacket = time.sleep(0.5)
+		print(rxPacket)
 		self.sensor.LED(False)
 
 app=App()
