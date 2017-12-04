@@ -49,6 +49,9 @@ class App:
 				print("Please Enter number")
 				self.enroll()
 			
+			sense = self.sensor.senseFinger()
+			print(sense)
+
 			if self.sensor.senseFinger()[0]['Parameter'] == 0:
 				procced = True
 
