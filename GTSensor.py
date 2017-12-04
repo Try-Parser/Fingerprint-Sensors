@@ -82,7 +82,7 @@ class GTSensor:
 
 		data_len = len(rxPacket) - 4
 
-		rxPacket = struct.unpack(DATA_STRUCT(data_len), rxPacket)
+		rxPacket = struct.unpack(GT521F5.DATA_STRUCT(data_len), rxPacket)
 		response['Header'] = hex(rxPacket[0])[2:] + hex(rxPacket[1])[2:]
 		response['DeviceID'] = hex(rxPacket[2])[2:]
 		response['Data'] = rxPacket[3]
