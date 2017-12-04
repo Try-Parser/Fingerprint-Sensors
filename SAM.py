@@ -23,8 +23,22 @@ class App:
 		self.sensor.LED(True)
 		print(baudrateResult)
 		time.sleep(0.5)
-		self.sensor.close()
-		rxPacket = time.sleep(0.5)
+		self.sensor.LED(False)
+		time.sleep(0.2)
+
+		self.sensor.LED(True)
+		_ = input("Place your finger and then press <Enter>")
+
+		cfResp = self.sensor.captureFinger(True)
+		print (cfResp)
+
+		time.sleep(0.2)
+		print ("Generating template")
+
+		rx = self.sensor.genTemplate()
+		print (rx)
+
+		rxPacket = self.sensor.close()
 		print(rxPacket)
 		self.sensor.LED(False)
 
