@@ -6,25 +6,17 @@ class GTSensor:
 	def __init__(
 			self, 
 			port, 
-			baudrate=9600, 
-			bytesize=serial.EIGHTBITS, 
-			parity=serial.PARITY_NONE, 
-			stopbits=serial.STOPBITS_ONE, 
-			timeout=None, 
-			xonxoff=0, 
-			rtscts=0):
+			baudrate = 9600, 
+			timeout = 2,
+			*args, **kwargs):
 
 		try: 
 			self.address = GT521F5.OPEN.value
 			self.serial = serial.Serial(
-				port, 
-				baudrate, 
-				bytesize, 
-				parity, 
-				stopbits, 
-				timeout, 
-				xonxoff, 
-				rtscts)
+				port = port, 
+				baudrate = baudrate, 
+				timeout = timeout,
+				*args, **kwargs)
 
 			self.usb_timeout = timeout
 
