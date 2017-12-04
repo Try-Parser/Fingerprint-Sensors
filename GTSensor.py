@@ -129,7 +129,7 @@ class GTSensor:
 		return [rxPacket, data]
 
 	def close(self):
-		if self.writePacket(GT521F5.CLOSE.value):
+		if self.writePacket(GT521F5.CLOSE.value, GT521F5.DEFAULT.value):
 			return self.receivedPacket()
 		else:
 			raise RuntimeError("Couldn't send packet.")
