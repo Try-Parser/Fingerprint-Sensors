@@ -66,6 +66,7 @@ class App:
 			self.sensor.LED(True)
 			if self.__capture_the_lights__():
 				template = self.sensor.genTemplate()
+				time.sleep(0.2)
 				self.sensor.LED(False)
 				print(template)
 
