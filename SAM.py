@@ -42,10 +42,12 @@ class App:
 
 		if self.__capture_the_lights__(__id__):
 			template = self.sensor.genTemplate()
+			print(template[0])
+			print(template[1])
 
-			if self.__capture_the_lights__(__id__):
-				confirmation = self.sensor.indentify(template[1]['Data'])
-				print (confirmation)
+			# if self.__capture_the_lights__(__id__):
+			# 	confirmation = self.sensor.indentify(template[1]['Data'])
+			# 	print (confirmation)
 		else:
 			self.enroll()
 
