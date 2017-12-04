@@ -58,10 +58,11 @@ class App:
 
 		print ("terminitation")
 		self.sensor.LED(False)
-		self.sensor.close()
+		# self.sensor.close()
 		# exit(1)
 
 	def scanLoop(self):
+		self.sensor.LED(False)
 		if self.__capture_the_lights__():
 			template = self.sensor.genTemplate()
 			print(template)
