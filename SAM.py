@@ -59,7 +59,7 @@ class App:
 		print ("terminitation")
 		self.sensor.LED(False)
 		self.sensor.close()
-		exit(1)
+		# exit(1)
 
 	def scanLoop(self):
 		if self.__capture_the_lights__():
