@@ -13,7 +13,7 @@ class App:
 
 		time.sleep(0.5)
 		print ("Setting baudrate from 9600 to 57600")
-		baudrateResult = self.sensor.setBaudrate(56700)
+		baudrateResult = self.sensor.setBaudrate(57600)
 		self.sensor.LED(True)
 		print(baudrateResult)
 		self.sensor.LED(False)
