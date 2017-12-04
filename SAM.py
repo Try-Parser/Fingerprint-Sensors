@@ -15,7 +15,7 @@ class App:
 		baudrateResult = self.sensor.setBaudrate(57600)
 		print ("Setting is done testing for LED lights")
 		self.sensor.LED(True)
-		time.sleep(0.7)
+		time.sleep(0.5)
 		self.sensor.LED(False)
 		
 		# self.sensor.LED(True)
@@ -62,7 +62,7 @@ class App:
 				self.sensor.close()
 
 app=App()
-# app.enroll()
+app.enroll()
 
 
 
