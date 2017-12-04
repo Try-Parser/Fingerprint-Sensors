@@ -131,7 +131,7 @@ class GTSensor:
 	def initialize(self, extra_info = False, check_baudrate = False):
 		if check_baudrate:
 			self.serial.timeout = 0.5
-			for baudrate in (self.serial.baudrate) + self.serial.BAUDRATES:
+			for baudrate in (self.serial.baudrate,) + self.serial.BAUDRATES:
 				if 9600 <= baudrate <= 115200:
 					self.serial.baudrate = baudrate
 					if not self.writePacket(self.address, extra_info*1):
