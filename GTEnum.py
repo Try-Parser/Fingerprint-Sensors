@@ -60,27 +60,28 @@ class GT521F5(Enum):
     IDENTIFY_TEMPLATE          = 0xF4
     IDENTIFY_TEMPLATE_PARAM    = 0x1F4
 
-    # Error Response 
-    NACK_TIMEOUT               = 0x1001 # (Obsolete) Capture timeout
-    NACK_INVALID_BAUDRATE      = 0x1002 # (Obsolete) Invalid serial baud rate
-    NACK_INVALID_POS           = 0x1003 # The specified ID is not in range[0,199]
-    NACK_IS_NOT_USED           = 0x1004 # The specified ID is not used
-    NACK_IS_ALREADY_USED       = 0x1005 # The specified ID is already in use
-    NACK_COMM_ERR              = 0x1006 # Communication error
-    NACK_VERIFY_FAILED         = 0x1007 # 1:1 Verification Failure
-    NACK_IDENTIFY_FAILED       = 0x1008 # 1:N Identification Failure
-    NACK_DB_IS_FULL            = 0x1009 # The database is full
-    NACK_DB_IS_EMPTY           = 0x100A # The database is empty
-    NACK_TURN_ERR              = 0x100B # (Obsolete) Invalid order of the enrollment
-                                        # (EnrollStart->Enroll1->Enroll2->Enroll3)
-    NACK_BAD_FINGER            = 0x100C # Fingerprint is too bad
-    NACK_ENROLL_FAILED         = 0x100D # Enrollment Failure
-    NACK_IS_NOT_SUPPORTED      = 0x100E # The command is not supported
-    NACK_DEV_ERR               = 0x100F # Device error: probably Crypto-Chip is faulty (Wrong checksum ~Z)
-    NACK_CAPTURE_CANCELED      = 0x1010 # (Obsolete) Capturing was canceled
-    NACK_INVALID_PARAM         = 0x1011 # nvalid parameter
-    NACK_FINGER_IS_NOT_PRESSED = 0x1012 # Finger is not pressed
-
+    ERRORS = {
+        # Error Response 
+        0x1001: 'NACK_TIMEOUT'               # (Obsolete) Capture timeout
+        0x1002: 'NACK_INVALID_BAUDRATE'      # (Obsolete) Invalid serial baud rate
+        0x1003: 'NACK_INVALID_POS'           # The specified ID is not in range[0,199]
+        0x1004: 'NACK_IS_NOT_USED'           # The specified ID is not used
+        0x1005: 'NACK_IS_ALREADY_USED'       # The specified ID is already in use
+        0x1006: 'NACK_COMM_ERR'              # Communication error
+        0x1007: 'NACK_VERIFY_FAILED'         # 1:1 Verification Failure
+        0x1008: 'NACK_IDENTIFY_FAILED'       # 1:N Identification Failure
+        0x1009: 'NACK_DB_IS_FULL'            # The database is full
+        0x100A: 'NACK_DB_IS_EMPTY'           # The database is empty
+        0x100B: 'NACK_TURN_ERR'              # (Obsolete) Invalid order of the enrollment
+                                             # (EnrollStart->Enroll1->Enroll2->Enroll3)
+        0x100C: 'NACK_BAD_FINGER'            # Fingerprint is too bad
+        0x100D: 'NACK_ENROLL_FAILED'         # Enrollment Failure
+        0x100E: 'NACK_IS_NOT_SUPPORTED'      # The command is not supported
+        0x100F: 'NACK_DEV_ERR'               # Device error: probably Crypto-Chip is faulty (Wrong checksum ~Z)
+        0x1010: 'NACK_CAPTURE_CANCELED'      # (Obsolete) Capturing was canceled
+        0x1011: 'NACK_INVALID_PARAM'         # nvalid parameter
+        0x1012: 'NACK_FINGER_IS_NOT_PRESSED' # Finger is not pressed
+    }
 
     COMM_STRUCT                 = lambda: '<BBHIH'
     DATA_STRUCT                 = lambda x: '<BBH' + str(x) + 's'
