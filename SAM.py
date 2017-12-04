@@ -72,6 +72,8 @@ class App:
 
 app=App()
 app.enroll()
+time.sleep(0.5)
+app.scanLoop()
 
 
 
