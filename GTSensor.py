@@ -170,7 +170,7 @@ class GTSensor:
 			raise RuntimeError("Couldn't send packet.")
 
 	def genTemplate(self):
-		if self.writePacket(GT521F5.MAKE_TEMPLATE.value, 0x00):
+		if self.writePacket(GT521F5.MAKE_TEMPLATE.value, GT521F5.DEFAULT.value):
 			response = self.receivedPacket()
 		else:
 			raise RuntimeError("Couldn't send packet.")
@@ -194,3 +194,9 @@ class GTSensor:
 			raise RuntimeError("Couldn't send packet (data)")
 
 		return [response, data]
+
+	def senseFinger(self):
+		if self.writePacket(GT521F5.DETECT_FINGER.value, GT521F5.DEFAULT.value):
+			return [self.receivedPacket(), None]
+		else:
+			raise RuntimeError("Couldn't send packet.")
