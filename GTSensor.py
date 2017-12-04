@@ -203,7 +203,7 @@ class GTSensor:
 		else:
 			raise RuntimeError("Couldn't send packet.")
 
-		if self.writeData("\x01\x01" + template.decode("utf-8"), 500):
+		if self.writeData("\x01\x01" + template.decode("utf-8", "replace"), 500):
 			data = self.receivedPacket()
 		else:
 			raise RuntimeError("Couldn't send packet (data)")
