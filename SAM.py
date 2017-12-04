@@ -49,6 +49,8 @@ class App:
 			if not __id__.isdigit():
 				print("Please Enter number")
 				self.enroll()
+			else:
+				print ("Please put your finger on the sensor.")
 
 			if self.sensor.senseFinger()[0]['Parameter'] == 0:
 				procced = True
@@ -57,11 +59,15 @@ class App:
 				print ("Capturing Fingerprint")
 				time.sleep(0.1)
 				captureResponse = self.sensor.captureFinger(True)
-				print ("Caputre Response")
 				print (captureResponse)
+				
+				time.sleep(0.2)
+				print ("Generating template")
+				template = self.sensor.genTemplate()
+				print(template)
 				break
-		print ("terminitation")
 
+		print ("terminitation")
 		self.sensor.LED(False)
 		self.sensor.close()
 		exit(1)
