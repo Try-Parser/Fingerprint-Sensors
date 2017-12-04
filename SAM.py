@@ -18,10 +18,10 @@ class App:
 		time.sleep(0.5)
 		self.sensor.LED(False)
 
-	def __capture_the_lights__(self, id): 
+	def __capture_the_lights__(self, idx): 
 		while True:
 			procced = False
-			if not __id__.isdigit():
+			if not idx.isdigit():
 				print("Please Enter a number")
 				return False
 
