@@ -56,12 +56,10 @@ class GTSensor:
 		rxPacket = rxPacket[:-2]
 		response['Checksum'] = sum(rxPacket) == checksum
 
-		# try:
-		# 	rxPacket = sum(struct.unpack(GT521F5.COMM_STRUCT(), rxPacket))
-		# except Exception as e:
-		# 	raise Exception(str(e) + ' ' + str(rxPacket[0]))
-
-		print(rxPacket)
+		try:
+			rxPacket = struct.unpack(GT521F5.COMM_STRUCT(), rxPacket)
+		except Exception as e:
+			raise Exception(str(e) + ' ' + str(rxPacket[0]))
 
 		response['Header'] = hex(rxPacket[0])[2:] + hex(rxPacket[1])[2:]
 		response['DeviceID'] = hex(rxPacket[2])[2:]
