@@ -39,7 +39,7 @@ class App:
 		print (rx)
 
 		rxPacket = self.sensor.close()
-		# print(rxPacket)
+		print(rxPacket)
 		self.sensor.LED(False)
 
 app=App()

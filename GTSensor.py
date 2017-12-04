@@ -69,7 +69,6 @@ class GTSensor:
 		return response
 
 	def decode_data(self, rxPacket):
-		print(rxPacket)
 		response = {
 			'Header'	: None,
 			'DeviceID'	: None,
