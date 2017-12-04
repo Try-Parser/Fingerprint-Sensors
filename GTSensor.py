@@ -120,6 +120,7 @@ class GTSensor:
 	def initialize(self, extra_info = False):
 		rxPacket = self.writePacket(self.address, extra_info*1)
 
+		self.serial.timeout = 0.5
 		data = None
 
 		if extra_info:
