@@ -42,12 +42,12 @@ class App:
 
 
 	def enroll(self):
-		__id__ = input("Enter ID")
+		__id__ = input("Enter ID : ")
 		while True:
 			if not __id__.isdigit():
 				print("Please Enter number")
 				self.enroll()
-			elif self.sensor.senseFinger()['Parameter'] == 4114:
+			elif self.sensor.senseFinger()[0]['Parameter'] == 4114:
 				pass
 			else:
 				print ("Capturing Fingerprint")
