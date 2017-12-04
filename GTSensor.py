@@ -128,16 +128,31 @@ class GTSensor:
 		return result
 
 	# commands
-	def initialize(self, extra_info = False):
-		rxPacket = self.writePacket(self.address, extra_info*1)
+	def initialize(self, extra_info = False, check_baudrate = False):
+		if check_baudrate:
+			self.serial.timeout = 0.5
+			for baudrate in (self.serial.baudrate) + self.serial.BAUDRATES:
+				if 9600 <= baudrate <= 115200:
+					self.serial.baudrate = baudrate
+					if not self.writePacket(self.address, extra_info*1):
+						raise RuntimeError("Couldn't send 'Open' packet!")
 
-		self.serial.timeout = 0.5
+					response = self.receivedPacket()
+					if response['ACK']:
+						response['Parameter'] = baudrate
+						break
+
+			if self.serial.baudrate > 115200:
+				raise RuntimeError("Couldn't find appropriate baudrate!")
+		else:
+			self.writePacket(self.address, extra_info*1)
+			response = self.receivedPacket()
 		data = None
-
 		if extra_info:
 			data = self.receivedData(16+4+4)
-		self.serial.timeout = self.usb_timeout
-		return [rxPacket, data]
+		self.serial.timeout  = self.usb_timeout
+		return [response, data]
+
 
 	def close(self):
 		if self.writePacket(GT521F5.CLOSE.value, GT521F5.DEFAULT.value):
