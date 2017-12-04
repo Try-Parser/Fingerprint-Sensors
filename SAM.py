@@ -57,11 +57,12 @@ class App:
 				print ("Caputre Response")
 				print (captureResponse)
 				print ("terminitation")
-				
+
 				self.sensor.LED(False)
 				self.sensor.close()
 
 app=App()
+app.enroll()
 
 
 
