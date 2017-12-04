@@ -59,11 +59,13 @@ class App:
 				captureResponse = self.sensor.captureFinger(True)
 				print ("Caputre Response")
 				print (captureResponse)
-				print ("terminitation")
-
-				self.sensor.LED(False)
-				self.sensor.close()
 				break
+		print ("terminitation")
+
+		self.sensor.LED(False)
+		self.sensor.close()
+		exit(1)
+
 
 app=App()
 app.enroll()
