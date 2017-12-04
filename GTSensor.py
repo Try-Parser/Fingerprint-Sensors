@@ -64,7 +64,7 @@ class GTSensor:
 		response['Header'] = hex(rxPacket[0])[2:] + hex(rxPacket[1])[2:]
 		response['DeviceID'] = hex(rxPacket[2])[2:]
 		response['ACK'] = rxPacket[4] != 0x31
-		response['Parameter'] = GT521F5.ERRORS[rxPacket[3]] if (not response['ACK'] and rxPacket[3] in GT521F5.ERRORS) else rxPacket[3]
+		response['Parameter'] = GT521F5.ERRORS.value[rxPacket[3]] if (not response['ACK'] and rxPacket[3] in GT521F5.ERRORS.value) else rxPacket[3]
 
 		return response
 
