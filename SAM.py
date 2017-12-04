@@ -3,7 +3,7 @@ import time
 
 class App:
 	def __init__(self):
-		self.sensor = GTSensor('/dev/ttyAMA0', timeout=5.0)
+		self.sensor = GTSensor('/dev/ttyAMA0', timeout=2, baudrate=9600)
 
 		_initialization_response = self.sensor.initialize(True)
 
