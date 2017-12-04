@@ -62,10 +62,12 @@ class App:
 		# exit(1)
 
 	def scanLoop(self):
-		self.sensor.LED(True)
-		if self.__capture_the_lights__():
-			template = self.sensor.genTemplate()
-			print(template)
+		while True:
+			self.sensor.LED(True)
+			if self.__capture_the_lights__():
+				template = self.sensor.genTemplate()
+				self.sensor.LED(False)
+				print(template)
 
 
 
