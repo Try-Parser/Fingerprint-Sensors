@@ -43,6 +43,7 @@ class App:
 
 	def enroll(self):
 		__id__ = input("Enter ID : ")
+		self.sensor.LED(True)
 		while True:
 			procced = False
 			if not __id__.isdigit():
@@ -59,7 +60,6 @@ class App:
 			
 			if procced:
 				print ("Capturing Fingerprint")
-				self.sensor.LED(True)
 				time.sleep(0.1)
 				captureResponse = self.sensor.captureFinger(True)
 				print ("Caputre Response")
