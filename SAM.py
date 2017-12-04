@@ -7,9 +7,10 @@ class App:
 
 		_initialization_response = self.sensor.initialize(True)
 		time.sleep(0.5)
-		self.sensor.LED(True)
-		time.sleep(0.5)
+
 		print(_initialization_response)
+		time.sleep(0.5)
+		self.sensor.LED(True)
 		time.sleep(0.5)
 		self.sensor.LED(False)
 
