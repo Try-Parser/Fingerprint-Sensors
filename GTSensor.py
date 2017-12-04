@@ -57,7 +57,7 @@ class GTSensor:
 		response['Checksum'] = sum(rxPacket) == checksum
 
 		try:
-			rxPacket = sum(struct.unpack(GT521F5.CHECK_SUM_STRUCT(), rxPacket))
+			rxPacket = sum(struct.unpack(GT521F5.COMM_STRUCT(), rxPacket))
 		except Exception as e:
 			raise Exception(str(e) + ' ' + str(rxPacket[0]))
 
