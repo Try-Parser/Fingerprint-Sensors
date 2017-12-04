@@ -105,16 +105,14 @@ class GTSensor:
 		return self.decode_command(rxPacket)
 
 	def encode_data(self, data, length, address):
-		print(data)
-		txPacket = bytearray([
+		txPacket = bytearray(struct.pack(GT521F5.DATA_STRUCT(length),
 			GT521F5.CMD_DATA_1.value,
 			GT521F5.CMD_DATA_2.value,
 			address,
 			data
-		])
+		))
 
 		checksum = sum(txPacket)
-		print (checksum)
 		txPacket += bytearray(struct.pack(GT521F5.CHECK_SUM_STRUCT(), checksum))
 		return txPacket
 
