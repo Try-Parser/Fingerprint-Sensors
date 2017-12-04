@@ -44,7 +44,7 @@ class GTSensor:
 			'Checksum'	: None
 		}
 
-		if rxPacket == '':
+		if rxPacket == b'':
 			response['ACK'] = False
 			return response
 
