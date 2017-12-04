@@ -33,6 +33,7 @@ OFFSET  ITEM        TYPE    DESCRIPTION
 from enum import Enum
 
 class GT521F5(Enum):
+    # Command
     OPEN                       = 0x01
     CLOSE                      = 0x02
     USB_INTERNAL_CHECK         = 0x03
