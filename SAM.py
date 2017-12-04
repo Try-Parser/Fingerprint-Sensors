@@ -62,7 +62,7 @@ class App:
 				self.sensor.close()
 
 app=App()
-app.enroll()
+# app.enroll()
 
 
 
