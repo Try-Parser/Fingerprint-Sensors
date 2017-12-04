@@ -17,40 +17,13 @@ class App:
 		self.sensor.LED(True)
 		time.sleep(0.5)
 		self.sensor.LED(False)
-		
-		# self.sensor.LED(True)
-		# print(baudrateResult)
-		# time.sleep(0.5)
-		# self.sensor.LED(False)
-		# time.sleep(0.2)
 
-		# self.sensor.LED(True)
-		# _ = input("Place your finger and then press <Enter>")
-
-		# cfResp = self.sensor.captureFinger(True)
-		# print (cfResp)
-
-		# time.sleep(0.2)
-		# print ("Generating template")
-
-		# rx = self.sensor.genTemplate()
-		# print (rx)
-
-		# rxPacket = self.sensor.close()
-		# print(rxPacket)
-		# self.sensor.LED(False)
-
-
-	def enroll(self):
-		__id__ = input("Enter ID : ")
-		self.sensor.LED(True)
+	def __capture_the_lights__(self, id): 
 		while True:
 			procced = False
 			if not __id__.isdigit():
-				print("Please Enter number")
-				self.enroll()
-			else:
-				print ("Please put your finger on the sensor.")
+				print("Please Enter a number")
+				return False
 
 			if self.sensor.senseFinger()[0]['Parameter'] == 0:
 				procced = True
@@ -58,14 +31,47 @@ class App:
 			if procced:
 				print ("Capturing Fingerprint")
 				time.sleep(0.1)
-				captureResponse = self.sensor.captureFinger(True)
-				print (captureResponse)
+				if self.sensor.captureFinger(True)['ACK']:
+					return True				
+
+	def enroll(self):
+		__id__ = input("Enter ID : ")
+		self.sensor.LED(True)
+		time.sleep(0.1)
+		print ("Please put your finger on the sensor.")
+
+		if __capture_the_lights__(__id__):
+			template = self.sensor.genTemplate()
+
+			if __capture_the_lights__(__id__):
+				confirmation = self.sensor.indentify(template[1]['Data'])
+				print (confirmation)
+		else:
+			self.enroll()
+
+
+
+		# while True:
+		# 	procced = False
+		# 	if not __id__.isdigit():
+		# 		print("Please Enter number")
+		# 		self.enroll()
+
+		# 	if self.sensor.senseFinger()[0]['Parameter'] == 0:
+		# 		procced = True
+			
+		# 	if procced:
+		# 		print ("Capturing Fingerprint")
+		# 		time.sleep(0.1)
+		# 		captureResponse = self.sensor.captureFinger(True)
+		# 		print (captureResponse)
 				
-				time.sleep(0.2)
-				print ("Generating template")
-				template = self.sensor.genTemplate()
-				print(template)
-				break
+		# 		time.sleep(0.2)
+		# 		print ("Generating template")
+		# 		template = self.sensor.genTemplate()
+
+		# 		print(template)
+		# 		break
 
 		print ("terminitation")
 		self.sensor.LED(False)
