@@ -4,7 +4,7 @@ import time
 class App:
 	def __init__(self):
 		self.sensor = GTSensor('/dev/ttyAMA0', timeout=2, baudrate=9600)
-
+		self.stopScan = False
 		_initialization_response = self.sensor.initialize(True, True)
 		time.sleep(0.5)
 
@@ -62,20 +62,15 @@ class App:
 		# exit(1)
 
 	def scanLoop(self):
-		while True:
+		while not self.stopScan:
 			self.sensor.LED(True)
-			time.sleep(0.2)
+			time.sleep(0.5)
 			if self.__capture_the_lights__():
 				template = self.sensor.genTemplate()
 				self.sensor.LED(False)
-				time.sleep(0.2)
+				time.sleep(0.5)
 				print(template)
+			if self.stopScan:
+				break
 
-# app=App()
-# app.enroll()
-# time.sleep(0.5)
-# app.scanLoop()
-
-
-
-
+		print ("stop scanning")
