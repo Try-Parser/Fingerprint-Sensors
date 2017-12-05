@@ -192,6 +192,7 @@ class Smart_Attendance_Monitor:
 
 	def on_exit(self):
 		self.stop = True
+		self.app.stopScan = True
 		root.destroy()
 
 	def update_clock(self):
