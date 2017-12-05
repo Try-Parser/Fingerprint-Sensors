@@ -190,8 +190,6 @@ class Smart_Attendance_Monitor:
 		self.Button4.configure(relief=GROOVE)
 		self.Button4.configure(text='''Signout''')
 
-		self.app.scanLoop()
-
 	def on_exit(self):
 		self.stop = True
 		root.destroy()
@@ -203,7 +201,7 @@ class Smart_Attendance_Monitor:
 
 		if self.scanThread['v'] == False:
 			print("Scanner Started")
-			self.scanThread = { 'v': True, 'thread': self.thread(self.app.enroll) }
+			self.scanThread = { 'v': True, 'thread': self.thread(self.app.scanLoop) }
 
 		self.Time.configure(text=time.strftime("%I:%M:%S %p"))
 		self.Date.configure(text=date.today().strftime('%A %d %B %Y'))
