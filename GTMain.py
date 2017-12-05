@@ -23,7 +23,7 @@ class App:
 			procced = False
 
 			if self.stopScan:
-				break;
+				return False
 
 			if self.sensor.senseFinger()[0]['Parameter'] == 0:
 				procced = True
@@ -73,6 +73,9 @@ class App:
 				self.sensor.LED(False)
 				time.sleep(0.5)
 				print(template)
+			else:
+				self.sensor.LED(False)
+				break;
 
 			if self.stopScan:
 				break
