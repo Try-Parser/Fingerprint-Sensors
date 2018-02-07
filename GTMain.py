@@ -43,24 +43,27 @@ class App:
 	def enroll(self, ws):
 		# self.sensor.LED(True)
 		time.sleep(0.1)
-		if self.__capture_the_lights__():
-			template = self.sensor.genTemplate()
-			print(template[0])
-			print(template[1])
-
-			time.sleep(0.2)
+		try:
 			if self.__capture_the_lights__():
-				confirmation = self.sensor.indentify(template[1]['Data'])
-				print (confirmation)
-				print ("dere ang error")
-				if confirmation[1]["ACK"] == True:
-					ws.send('{ "command": "save", "template": "'+ base64.b64encode(template[1]["Data"]).decode() +'", "message": "Finger Template is confirmed"}')
-				else:
-					ws.send('{ "command": "error", "message": "failed to acknowledge the finger template!"}')
-					self.enroll(ws)
-		else:
-			self.enroll(ws)
+				template = self.sensor.genTemplate()
+				print(template[0])
+				print(template[1])
 
+				time.sleep(0.2)
+				if self.__capture_the_lights__():
+					confirmation = self.sensor.indentify(template[1]['Data'])
+					print (confirmation)
+					print ("dere ang error")
+					if confirmation[1]["ACK"] == True:
+						ws.send('{ "command": "save", "template": "'+ base64.b64encode(template[1]["Data"]).decode() +'", "message": "Finger Template is confirmed"}')
+					else:
+						ws.send('{ "command": "error", "message": "failed to acknowledge the finger template!"}')
+						self.enroll(ws)
+			else:
+				self.enroll(ws)
+		except Error:
+			self.enroll(ws)
+			
 		print ("terminitation")
 		self.sensor.LED(False)
 		# self.sensor.close()
