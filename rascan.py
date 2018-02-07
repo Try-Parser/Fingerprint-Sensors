@@ -26,7 +26,7 @@ class Rascan:
 		if templates["success"] == True and len(templates["results"]) > 0 and templates["from"] <= templates["total"]-1:
 			self.templates.append(templates["results"][0])
 		else:
-			t2 = threading.Thread(target=self.app.scanLoop)
+			t2 = threading.Thread(target=self.app.enroll)
 			t2.start()
 
 	def on_error(self, ws, error):
