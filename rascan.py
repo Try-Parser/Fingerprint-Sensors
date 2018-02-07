@@ -7,7 +7,7 @@ class Rascan:
 	def  __init__(self):
 		websocket.enableTrace(True)
 		self.ws = websocket.WebSocketApp(
-			"ws://localhost:8081/rascan/socket", 
+			"ws://192.168.254.103:8081/rascan/socket", 
 			on_message = self.on_message, 
 			on_error = self.on_error, 
 			on_close = self.on_close)
@@ -26,8 +26,8 @@ class Rascan:
 		if templates["success"] == True and len(templates["results"]) > 0:
 			self.templates.append(templates["results"][0])
 		else:
-			threading.Thread(target=self.app.scanLoop).start()
-
+			t2 = threading.Thread(target=self.app.scanLoop)
+			t2.start()
 
 	def on_error(self, ws, error):
 		print(error)
