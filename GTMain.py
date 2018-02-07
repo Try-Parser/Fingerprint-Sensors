@@ -39,7 +39,7 @@ class App:
 				if self.sensor.captureFinger(True)['ACK']:
 					return True
 
-	def enroll(self, rascan):
+	def enroll(self, ws):
 		print("Enrollment Starting")
 		# self.sensor.LED(True)
 		time.sleep(0.1)
@@ -53,9 +53,9 @@ class App:
 				confirmation = self.sensor.indentify(template[1]['Data'])
 				print (confirmation)
 				if confirmation[1]["ACK"] == True:
-					rascan.ws('{ "command": "save", "template": '+ base64.b64encode(template[1]) +', "message": "Finger Template is confirmed"}')
+					ws('{ "command": "save", "template": '+ base64.b64encode(template[1]) +', "message": "Finger Template is confirmed"}')
 				else:
-					rascan.ws('{ "command": "error", "message": "failed to acknowledge the finger template!"}')
+					ws('{ "command": "error", "message": "failed to acknowledge the finger template!"}')
 					self.enroll(rascan)
 
 				#logical process

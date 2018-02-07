@@ -28,7 +28,7 @@ class Rascan:
 		else:
 			print("Enrollment Starting")
 			self.app.sensor.LED(True)
-			t2 = threading.Thread(target=self.app.enroll, args=(self))
+			t2 = threading.Thread(target=self.app.enroll, args=(self.ws))
 			t2.start()
 
 	def on_error(self, ws, error):
