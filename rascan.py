@@ -27,7 +27,6 @@ class Rascan:
 		if templates["message"] == "NFP":
 			self.templates.append(resp)
 			print("Enrollment Starting")
-			self.app.sensor.LED(True)
 			t4 = threading.Thread(target=self.app.enroll, args=(self.ws,))
 			t4.start()
 		else:
@@ -36,7 +35,6 @@ class Rascan:
 				self.templates.append(resp["results"][0])
 				if resp["from"] == resp["total"]-1:
 					print("Enrollment Starting")
-					self.app.sensor.LED(True)
 					t3 = threading.Thread(target=self.app.enroll, args=(self.ws,))
 					t3.start()
 				else:
@@ -44,7 +42,6 @@ class Rascan:
 					print(resp["total"]-1)
 			else:
 				print("Enrollment Starting")
-				self.app.sensor.LED(True)
 				t2 = threading.Thread(target=self.app.enroll, args=(self.ws,))
 				t2.start()
 
