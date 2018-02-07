@@ -65,21 +65,39 @@ class App:
 		# self.sensor.close()
 		# exit(1)
 
-	# def processor(self, template):
-	# 	confirmation = self.sensor.indentify(tempate["fptemplate"])
 
 	# def security(self, templates):
 	# 	self.multiPool.map(self.processor, templates)
 
-	def scanLoop(self):
+	# def scanLoop(self):
+	# 	while not self.stopScan:
+	# 		self.sensor.LED(True)
+	# 		time.sleep(0.5)
+	# 		if self.__capture_the_lights__():
+	# 			template = self.sensor.genTemplate()
+	# 			self.sensor.LED(False)
+	# 			time.sleep(0.5)
+	# 			print(template)
+	# 		else:
+	# 			self.sensor.LED(False)
+	# 			break;
+
+	# 		if self.stopScan:
+	# 			break
+
+	# 	print ("stop scanning")
+
+	def scanLoop(self, rascan):
 		while not self.stopScan:
 			self.sensor.LED(True)
 			time.sleep(0.5)
 			if self.__capture_the_lights__():
-				template = self.sensor.genTemplate()
 				self.sensor.LED(False)
-				time.sleep(0.5)
-				print(template)
+				for i in rascan.templates:
+					self.processor(rascan.templates[i])
+
+				# confirmation = self.sensor.indentify(template[1]['Data'])
+				# time.sleep(0.5)
 			else:
 				self.sensor.LED(False)
 				break;
@@ -88,3 +106,7 @@ class App:
 				break
 
 		print ("stop scanning")
+
+	def processor(self, template):
+		confirmation = self.sensor.indentify(tempate["fptemplate"])
+		print(confirmation)

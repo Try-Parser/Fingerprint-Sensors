@@ -21,13 +21,37 @@ class Rascan:
 		t1 = threading.Thread(target=self.ws.run_forever)
 		t1.start()
 
+	# def on_message(self, ws, message):
+	# 	templates = json.loads(message)
+	# 	resp = templates["response"]
+	# 	if templates["message"] == "NFP":
+	# 		self.templates.append(resp)
+	# 		print("Enrollment Starting")
+	# 		t4 = threading.Thread(target=self.app.enroll, args=(self.ws,))
+	# 		t4.start()
+	# 	else:
+	# 		if templates["success"] == True and len(resp["results"]) > 0:
+	# 			print("Inserting template to memory")
+	# 			self.templates.append(resp["results"][0])
+	# 			if resp["from"] == resp["total"]-1:
+	# 				print("Enrollment Starting")
+	# 				t3 = threading.Thread(target=self.app.enroll, args=(self.ws,))
+	# 				t3.start()
+	# 			else:
+	# 				print(resp["from"])
+	# 				print(resp["total"]-1)
+	# 		else:
+	# 			print("Enrollment Starting")
+	# 			t2 = threading.Thread(target=self.app.enroll, args=(self.ws,))
+	# 			t2.start()
+
 	def on_message(self, ws, message):
 		templates = json.loads(message)
 		resp = templates["response"]
 		if templates["message"] == "NFP":
 			self.templates.append(resp)
 			print("Enrollment Starting")
-			t4 = threading.Thread(target=self.app.enroll, args=(self.ws,))
+			t4 = threading.Thread(target=self.app.scanLoop, args=(self,))
 			t4.start()
 		else:
 			if templates["success"] == True and len(resp["results"]) > 0:
@@ -35,14 +59,14 @@ class Rascan:
 				self.templates.append(resp["results"][0])
 				if resp["from"] == resp["total"]-1:
 					print("Enrollment Starting")
-					t3 = threading.Thread(target=self.app.enroll, args=(self.ws,))
+					t3 = threading.Thread(target=self.app.scanLoop, args=(self,))
 					t3.start()
 				else:
 					print(resp["from"])
 					print(resp["total"]-1)
 			else:
 				print("Enrollment Starting")
-				t2 = threading.Thread(target=self.app.enroll, args=(self.ws,))
+				t2 = threading.Thread(target=self.app.scanLoop, args=(self,))
 				t2.start()
 
 	def on_error(self, ws, error):
