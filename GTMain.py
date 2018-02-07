@@ -54,7 +54,7 @@ class App:
 				confirmation = self.sensor.indentify(template[1]['Data'])
 				print (confirmation)
 				if confirmation[1]["ACK"] == True:
-					ws.send('{ "command": "save", "template": '+ base64.b64encode(template[1]["Data"]).decode("utf-8") +', "message": "Finger Template is confirmed"}')
+					ws.send('{ "command": "save", "template": "'+ base64.b64encode(template[1]["Data"]) +'", "message": "Finger Template is confirmed"}')
 				else:
 					ws.send('{ "command": "error", "message": "failed to acknowledge the finger template!"}')
 					self.enroll(rascan)
