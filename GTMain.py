@@ -20,7 +20,7 @@ class App:
 		print ("Setting is done testing for LED lights")
 		self.sensor.LED(True)
 		time.sleep(0.5)
-		self.sensor.LED(False)
+		self.sensor.LED(False)	
 
 		self.template = ""
 
@@ -54,7 +54,7 @@ class App:
 				confirmation = self.sensor.indentify(template[1]['Data'])
 				print (confirmation)
 				if confirmation[1]["ACK"] == True:
-					ws.send('{ "command": "save", "template": "'+ base64.standard_b64encode(template[1]["Data"], encoding="UTF-8") +'", "message": "Finger Template is confirmed"}')
+					ws.send('{ "command": "save", "template": "'+ base64.b64encode(template[1]["Data"], encoding="UTF-8") +'", "message": "Finger Template is confirmed"}')
 				else:
 					ws.send('{ "command": "error", "message": "failed to acknowledge the finger template!"}')
 					self.enroll(rascan)
