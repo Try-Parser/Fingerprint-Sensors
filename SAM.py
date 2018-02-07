@@ -202,7 +202,7 @@ class Smart_Attendance_Monitor:
 
 		if self.scanThread['v'] == False:
 			print("Scanner Started")
-			self.scanThread = { 'v': True, 'thread': self.thread(self.app.scanLoop) }
+			self.scanThread = { 'v': True, 'thread': self.thread(self.app.enroll) }
 
 		self.Time.configure(text=time.strftime("%I:%M:%S %p"))
 		self.Date.configure(text=date.today().strftime('%A %d %B %Y'))

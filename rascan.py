@@ -28,7 +28,7 @@ class Rascan:
 			self.templates.append(resp)
 			print("Enrollment Starting")
 			self.app.sensor.LED(True)
-			t4 = threading.Thread(target=self.app.enroll, args=(self.ws,1, ))
+			t4 = threading.Thread(target=self.app.enroll, args=(self.ws,))
 			t4.start()
 		else:
 			if templates["success"] == True and len(resp["results"]) > 0:
@@ -37,7 +37,7 @@ class Rascan:
 				if resp["from"] == resp["total"]-1:
 					print("Enrollment Starting")
 					self.app.sensor.LED(True)
-					t3 = threading.Thread(target=self.app.enroll, args=(self.ws,2, ))
+					t3 = threading.Thread(target=self.app.enroll, args=(self.ws,))
 					t3.start()
 				else:
 					print(resp["from"])
@@ -45,7 +45,7 @@ class Rascan:
 			else:
 				print("Enrollment Starting")
 				self.app.sensor.LED(True)
-				t2 = threading.Thread(target=self.app.enroll, args=(self.ws,3, ))
+				t2 = threading.Thread(target=self.app.enroll, args=(self.ws,))
 				t2.start()
 
 	def on_error(self, ws, error):
