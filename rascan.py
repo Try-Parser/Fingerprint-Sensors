@@ -16,7 +16,7 @@ class Rascan:
 		self.ws.on_open = self.on_open
 		self.terminator = False
 		self.templates = []
-		self.couter = 0;
+		self.counter = 0;
 
 		t1 = threading.Thread(target=self.ws.run_forever)
 		t1.start()
@@ -27,13 +27,15 @@ class Rascan:
 
 		if templates["success"] == True and len(resp["results"]) > 0:
 			print("Inserting template to memory")
-			self.couter += 1
 			self.templates.append(resp["results"][0])
-			if self.couter == resp["total"]-1:
+			if resp["from"] == resp["total"]-1:
 				print("Enrollment Starting")
 				self.app.sensor.LED(True)
 				t3 = threading.Thread(target=self.app.enroll, args=(self.ws, ))
 				t3.start()
+			else:
+				print(resp["from"])
+				print(resp["total"]-1)
 		else:
 			print("Enrollment Starting")
 			self.app.sensor.LED(True)
