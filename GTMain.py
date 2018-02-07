@@ -35,8 +35,7 @@ class App:
 				print ("Capturing Fingerprint")
 				time.sleep(0.1)
 				if self.sensor.captureFinger(True)['ACK']:
-					return True				
-
+					return True
 
 	def enroll(self):
 		self.sensor.LED(True)
@@ -60,11 +59,11 @@ class App:
 		# self.sensor.close()
 		# exit(1)
 
-	def processor(self, template):
-		confirmation = self.sensor.indentify(tempate["fptemplate"])
+	# def processor(self, template):
+	# 	confirmation = self.sensor.indentify(tempate["fptemplate"])
 
-	def security(self, templates):
-		self.multiPool.map(self.processor, templates)
+	# def security(self, templates):
+	# 	self.multiPool.map(self.processor, templates)
 
 	def scanLoop(self):
 		while not self.stopScan:
