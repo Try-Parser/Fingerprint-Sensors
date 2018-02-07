@@ -22,7 +22,7 @@ class Rascan:
 
 	def on_message(self, ws, message):
 		templates = json.loads(message)
-		if templates["success"] == True and len(templates["results"]) > 0:
+		if templates["success"] == True and len(templates["response"]["results"]) > 0:
 			print("Inserting template to memory")
 			self.templates.append(templates["results"][0])
 		else:
