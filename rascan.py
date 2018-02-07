@@ -21,9 +21,9 @@ class Rascan:
 		t1.start()
 
 	def on_message(self, ws, message):
-		print(message)
 		templates = json.loads(message)
-		if templates["success"] == True and len(templates["results"]) > 0 and templates["from"] <= templates["total"]-1:
+		if templates["success"] == True and len(templates["results"]) > 0 and templates["from"] <= (templates["total"]-1):
+			print("Inserting template to memory")
 			self.templates.append(templates["results"][0])
 		else:
 			print("Enrollment Starting")
