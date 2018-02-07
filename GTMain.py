@@ -1,5 +1,6 @@
 from GTSensor import GTSensor
 import time
+from multiprocessing import Pool
 
 class App:
 	def __init__(self):
@@ -10,13 +11,15 @@ class App:
 
 		print(_initialization_response)
 
-
+		self.multiPool = Pool(5)
 		print ("Setting baudrate from 9600 to 57600")
 		baudrateResult = self.sensor.setBaudrate(57600)
 		print ("Setting is done testing for LED lights")
 		self.sensor.LED(True)
 		time.sleep(0.5)
 		self.sensor.LED(False)
+
+		self.template = ""
 
 	def __capture_the_lights__(self): 
 		while True:
@@ -36,33 +39,32 @@ class App:
 
 
 	def enroll(self):
-		__id__ = input("Enter ID : ")
 		self.sensor.LED(True)
 		time.sleep(0.1)
-		print ("Please put your finger on the sensor.")
+		if self.__capture_the_lights__():
+			template = self.sensor.genTemplate()
+			print(template[0])
+			print(template[1])
 
-		if __id__.isdigit(): 
+			time.sleep(0.2)
 			if self.__capture_the_lights__():
-				template = self.sensor.genTemplate()
-				print(template[0])
-				print(template[1])
+				confirmation = self.sensor.indentify(template[1]['Data'])
+				print (confirmation)
 
-				time.sleep(0.2)
-				if self.__capture_the_lights__():
-					confirmation = self.sensor.indentify(template[1]['Data'])
-					print (confirmation)
-
-					#logical process
-			else:
-				self.enroll()
+				#logical process
 		else:
-			print ("Please Enter number only!")
 			self.enroll()
 
 		print ("terminitation")
 		self.sensor.LED(False)
 		# self.sensor.close()
 		# exit(1)
+
+	def processor(self, template):
+		confirmation = self.sensor.indentify(tempate["fptemplate"])
+
+	def security(self, templates):
+		self.multiPool.map(self.processor, templates)
 
 	def scanLoop(self):
 		while not self.stopScan:
