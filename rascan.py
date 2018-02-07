@@ -24,23 +24,29 @@ class Rascan:
 	def on_message(self, ws, message):
 		templates = json.loads(message)
 		resp = templates["response"]
-
-		if templates["success"] == True and len(resp["results"]) > 0:
-			print("Inserting template to memory")
-			self.templates.append(resp["results"][0])
-			if resp["from"] == resp["total"]-1:
-				print("Enrollment Starting")
-				self.app.sensor.LED(True)
-				t3 = threading.Thread(target=self.app.enroll, args=(self.ws, ))
-				t3.start()
-			else:
-				print(resp["from"])
-				print(resp["total"]-1)
-		else:
+		if templates["message"] == "NFP":
+			self.templates.append(resp)
 			print("Enrollment Starting")
 			self.app.sensor.LED(True)
 			t2 = threading.Thread(target=self.app.enroll, args=(self.ws, ))
 			t2.start()
+		else:
+			if templates["success"] == True and len(resp["results"]) > 0:
+				print("Inserting template to memory")
+				self.templates.append(resp["results"][0])
+				if resp["from"] == resp["total"]-1:
+					print("Enrollment Starting")
+					self.app.sensor.LED(True)
+					t3 = threading.Thread(target=self.app.enroll, args=(self.ws, ))
+					t3.start()
+				else:
+					print(resp["from"])
+					print(resp["total"]-1)
+			else:
+				print("Enrollment Starting")
+				self.app.sensor.LED(True)
+				t2 = threading.Thread(target=self.app.enroll, args=(self.ws, ))
+				t2.start()
 
 	def on_error(self, ws, error):
 		print(error)
