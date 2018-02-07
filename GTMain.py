@@ -94,7 +94,7 @@ class App:
 			if self.__capture_the_lights__():
 				self.sensor.LED(False)
 				for i in rascan.templates:
-					print(i)
+					self.processor(i)
 
 				# confirmation = self.sensor.indentify(template[1]['Data'])
 				# time.sleep(0.5)
