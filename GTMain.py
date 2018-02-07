@@ -40,9 +40,9 @@ class App:
 				if self.sensor.captureFinger(True)['ACK']:
 					return True
 
-	def enroll(self, ws, id):
+	def enroll(self, ws, wtf):
 		# self.sensor.LED(True)
-		print(id)
+		print(wtf)
 		time.sleep(0.1)
 		try:
 			if self.__capture_the_lights__():
