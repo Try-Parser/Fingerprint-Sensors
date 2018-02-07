@@ -38,7 +38,8 @@ class App:
 					return True
 
 	def enroll(self):
-		self.sensor.LED(True)
+		print("Enrollment Starting")
+		# self.sensor.LED(True)
 		time.sleep(0.1)
 		if self.__capture_the_lights__():
 			template = self.sensor.genTemplate()
