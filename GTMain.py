@@ -2,7 +2,8 @@ from GTSensor import GTSensor
 import time
 from multiprocessing import Pool
 import base64
-
+import websocket
+import json
 
 class App:
 	def __init__(self):
@@ -53,9 +54,9 @@ class App:
 				confirmation = self.sensor.indentify(template[1]['Data'])
 				print (confirmation)
 				if confirmation[1]["ACK"] == True:
-					ws('{ "command": "save", "template": '+ base64.b64encode(template[1]) +', "message": "Finger Template is confirmed"}')
+					ws.send('{ "command": "save", "template": '+ base64.b64encode(template[1]) +', "message": "Finger Template is confirmed"}')
 				else:
-					ws('{ "command": "error", "message": "failed to acknowledge the finger template!"}')
+					ws.send('{ "command": "error", "message": "failed to acknowledge the finger template!"}')
 					self.enroll(rascan)
 
 				#logical process
