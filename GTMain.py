@@ -56,7 +56,7 @@ class App:
 					ws.send('{ "command": "save", "template": "'+ base64.b64encode(template[1]["Data"]).decode() +'", "message": "Finger Template is confirmed"}')
 				else:
 					ws.send('{ "command": "error", "message": "failed to acknowledge the finger template!"}')
-					self.enroll(ws)
+					# self.enroll(ws)
 		else:
 			self.enroll(ws)
 
