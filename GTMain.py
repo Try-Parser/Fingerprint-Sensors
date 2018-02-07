@@ -90,6 +90,7 @@ class App:
 	def scanLoop(self, rascan):
 		while not self.stopScan:
 			self.sensor.LED(True)
+			print(rascan.templates)
 			time.sleep(0.5)
 			if self.__capture_the_lights__():
 				self.sensor.LED(False)
