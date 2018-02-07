@@ -28,8 +28,8 @@ class Rascan:
 			self.templates.append(resp)
 			print("Enrollment Starting")
 			self.app.sensor.LED(True)
-			t2 = threading.Thread(target=self.app.enroll, args=(self.ws, ))
-			t2.start()
+			t4 = threading.Thread(target=self.app.enroll, args=(self.ws, ))
+			t4.start()
 		else:
 			if templates["success"] == True and len(resp["results"]) > 0:
 				print("Inserting template to memory")
