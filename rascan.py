@@ -23,7 +23,7 @@ class Rascan:
 	def on_message(self, ws, message):
 		print(message)
 		templates = json.loads(message)
-		if templates["success"] == True and len(templates["results"]) > 0 and templates["from"] >= templates["total"]:
+		if templates["success"] == True and len(templates["results"]) > 0 and templates["from"] <= templates["total"]-1:
 			self.templates.append(templates["results"][0])
 		else:
 			t2 = threading.Thread(target=self.app.scanLoop)
