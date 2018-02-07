@@ -23,11 +23,13 @@ class Rascan:
 
 	def on_message(self, ws, message):
 		templates = json.loads(message)
-		if templates["success"] == True and len(templates["response"]["results"]) > 0:
+		resp = templates["response"]
+
+		if templates["success"] == True and len(resp["results"]) > 0:
 			print("Inserting template to memory")
 			self.couter += 1
-			self.templates.append(templates["results"][0])
-			if self.couter == templates["response"]["total"]-1:
+			self.templates.append(resp["results"][0])
+			if self.couter == resp["total"]-1:
 				print("Enrollment Starting")
 				self.app.sensor.LED(True)
 				t3 = threading.Thread(target=self.app.enroll, args=(self.ws, ))
