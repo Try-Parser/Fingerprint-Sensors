@@ -53,7 +53,6 @@ class App:
 				if self.__capture_the_lights__():
 					confirmation = self.sensor.indentify(template[1]['Data'])
 					print (confirmation)
-					print ("dere ang error")
 					if confirmation[1]["ACK"] == True:
 						ws.send('{ "command": "save", "template": "'+ base64.b64encode(template[1]["Data"]).decode() +'", "message": "Finger Template is confirmed"}')
 					else:
@@ -61,9 +60,10 @@ class App:
 						self.enroll(ws)
 			else:
 				self.enroll(ws)
-		except Error:
+		except:
 			self.enroll(ws)
-			
+			print ("dere ang error")
+
 		print ("terminitation")
 		self.sensor.LED(False)
 		# self.sensor.close()
