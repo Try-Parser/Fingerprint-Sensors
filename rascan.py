@@ -17,7 +17,7 @@ class Rascan:
 		self.terminator = False
 		self.templates = []
 		self.counter = 0;
-		self.action;
+		self.action = "";
 
 		t1 = threading.Thread(target=self.ws.run_forever)
 		t1.start()
