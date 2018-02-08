@@ -96,7 +96,7 @@ class App:
 				if self.__capture_the_lights__():
 					self.sensor.LED(False)
 					# for i in rascan.templates:
-					multiPool.map(target=self.processor, rascan.templates)
+					multiPool.map(target=self.processor, args=(rascan.templates,))
 				else:
 					self.sensor.LED(False)
 					break;
