@@ -76,6 +76,8 @@ class Rascan:
 			self.app.ctl = True
 			self.app.stopScan = True
 			time.sleep(1)
+			self.app.ctl = False
+			self.app.stopScan = False
 			e1 = threading.Thread(target=self.app.enroll, args=(self,))
 			e1.start()
 
