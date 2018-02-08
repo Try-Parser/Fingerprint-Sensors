@@ -101,13 +101,11 @@ class App:
 					break;
 			else:
 				rascan.ws.send('{ "command": "error", "message": "No Templates available or the rascan is not initialized properly!"}')
-				self.stopScan = True;
 				break;
 
 			if self.stopScan:
 				break
 		
-		self.stopScan = False;
 		self.sensor.LED(False)
 		print ("stop scanning")
 
