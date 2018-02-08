@@ -70,7 +70,7 @@ class Rascan:
 					print("Check Starting")
 					c3 = threading.Thread(target=self.app.scanLoop, args=(self,))
 					c3.start()
-		elif(resp == "Re-initliaze"):
+		elif resp == "re-init":
 			print("Re-initializing Sensor")
 			self.app.stopScan = True
 			time.sleep(1)
