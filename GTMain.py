@@ -106,7 +106,6 @@ class App:
 					threading.Thread(target=self.processor, args=(rascan.templates, 7,)).start()
 					threading.Thread(target=self.processor, args=(rascan.templates, 8,)).start()
 					threading.Thread(target=self.processor, args=(rascan.templates, 9,)).start()
-					threading.Thread(target=self.processor, args=(rascan.templates, 10,)).start()
 				else:
 					self.sensor.LED(False)
 					break;
