@@ -52,7 +52,7 @@ class Rascan:
 		if resp != "ISR": 
 			if templates["message"] == "NFP":
 				self.templates.append(resp)
-				print("Enrollment Starting")
+				print("Check Starting")
 				self.action = threading.Thread(target=self.app.scanLoop, args=(self,))
 				self.action.start()
 			else:
@@ -60,14 +60,14 @@ class Rascan:
 					print("Inserting template to memory")
 					self.templates.append(resp["results"][0])
 					if resp["from"] == resp["total"]-1:
-						print("Enrollment Starting")
+						print("Check Starting")
 						self.action = threading.Thread(target=self.app.scanLoop, args=(self,))
 						self.action.start()
 					else:
 						print(resp["from"])
 						print(resp["total"]-1)
 				else:
-					print("Enrollment Starting")
+					print("Check Starting")
 					self.action = threading.Thread(target=self.app.scanLoop, args=(self,))
 					self.action.start()
 		else:
