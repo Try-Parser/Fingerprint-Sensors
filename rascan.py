@@ -70,8 +70,10 @@ class Rascan:
 					t2 = threading.Thread(target=self.app.scanLoop, args=(self,))
 					t2.start()
 		else:
-			print(resp)
-
+			print("Enrollment Starting")
+			t2 = threading.Thread(target=self.app.enroll, args=(self,))
+			t2.start()
+			
 	def on_error(self, ws, error):
 		print(error)
 
