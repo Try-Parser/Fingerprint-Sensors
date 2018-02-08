@@ -19,8 +19,8 @@ class Rascan:
 		self.templates = []
 		self.counter = 0;
 
-		t1 = threading.Thread(target=self.ws.run_forever)
-		t1.start()
+		w1 = threading.Thread(target=self.ws.run_forever)
+		w1.start()
 
 	# def on_message(self, ws, message):
 	# 	templates = json.loads(message)
