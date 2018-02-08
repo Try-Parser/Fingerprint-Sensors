@@ -75,7 +75,7 @@ class Rascan:
 		elif resp == "re-init":
 			print("Re-initializing Sensor")
 			self.app.stopScan = True
-			time.sleep(0.2)
+			time.sleep(0.1)
 			self.app.stopScan = False
 			self.templates = []
 			self.initialize()
@@ -83,7 +83,7 @@ class Rascan:
 			self.app.sensor.LED(False)
 			print("Enrollment Starting")
 			self.app.stopScan = True
-			time.sleep(0.2)
+			time.sleep(0.1)
 			self.app.stopScan = False
 			e1 = threading.Thread(target=self.app.enroll, args=(self.ws,))
 			e1.start()
