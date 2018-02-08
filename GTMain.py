@@ -102,6 +102,7 @@ class App:
 			else:
 				rascan.ws.send('{ "command": "error", "message": "No Templates available or the rascan is not initialized properly!"}')
 				self.stopScan = True;
+				break;
 
 			if self.stopScan:
 				break
