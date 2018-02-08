@@ -91,14 +91,18 @@ class App:
 		while not self.stopScan:
 			self.sensor.LED(True)
 			time.sleep(0.5)
-			if self.__capture_the_lights__():
-				self.sensor.LED(False)
-				for i in rascan.templates:
-					self.processor(i)
+			if len(rascan.templates) > 0:
+				if self.__capture_the_lights__():
+					self.sensor.LED(False)
+					for i in rascan.templates:
+						self.processor(i)
+				else:
+					self.sensor.LED(False)
+					break;
 			else:
-				self.sensor.LED(False)
+				rascan.ws.send('{ "command": "error", "message": "No Templates available or the rascan is not initialized properly!"}')
 				break;
-
+				
 			if self.stopScan:
 				break
 
