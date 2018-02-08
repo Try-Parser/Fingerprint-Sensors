@@ -17,7 +17,6 @@ class Rascan:
 		self.terminator = False
 		self.templates = []
 		self.counter = 0;
-		self.action = "";
 
 		t1 = threading.Thread(target=self.ws.run_forever)
 		t1.start()
@@ -53,28 +52,28 @@ class Rascan:
 			if templates["message"] == "NFP":
 				self.templates.append(resp)
 				print("Check Starting")
-				self.action = threading.Thread(target=self.app.scanLoop, args=(self,))
-				self.action.start()
+				c1 = threading.Thread(target=self.app.scanLoop, args=(self,))
+				c1.start()
 			else:
 				if templates["success"] == True and len(resp["results"]) > 0:
 					print("Inserting template to memory")
 					self.templates.append(resp["results"][0])
 					if resp["from"] == resp["total"]-1:
 						print("Check Starting")
-						self.action = threading.Thread(target=self.app.scanLoop, args=(self,))
-						self.action.start()
+						c2 = threading.Thread(target=self.app.scanLoop, args=(self,))
+						c2.start()
 					else:
 						print(resp["from"])
 						print(resp["total"]-1)
 				else:
 					print("Check Starting")
-					self.action = threading.Thread(target=self.app.scanLoop, args=(self,))
-					self.action.start()
+					c3 = threading.Thread(target=self.app.scanLoop, args=(self,))
+					c3.start()
 		else:
 			print("Enrollment Starting")
 			self.app.stopScan = True;
-			self.action = threading.Thread(target=self.app.enroll, args=(self,))
-			self.action.start()
+			e1 = threading.Thread(target=self.app.enroll, args=(self,))
+			e1.start()
 
 	def on_error(self, ws, error):
 		print(error)
