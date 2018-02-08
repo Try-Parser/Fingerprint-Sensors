@@ -47,6 +47,7 @@ class Rascan:
 
 	def on_message(self, ws, message):
 		templates = json.loads(message)
+		print(templates)
 		resp = templates["response"]
 		if templates["message"] == "NFP":
 			self.templates.append(resp)

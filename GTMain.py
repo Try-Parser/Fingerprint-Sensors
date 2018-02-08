@@ -55,7 +55,7 @@ class App:
 				if confirmation[1]["ACK"] == True:
 					ws.send('{ "command": "save", "template": "'+ base64.b64encode(template[1]["Data"]).decode() +'", "message": "Finger Template is confirmed"}')
 				else:
-					ws.send('{ "command": "error", "message": "failed to acknowledge the finger template!"}')
+					ws.send('{ "command": "IFPT", "message": "failed to acknowledge the finger template!"}')
 					# self.enroll(ws)
 		else:
 			self.enroll(ws)
@@ -95,9 +95,6 @@ class App:
 				self.sensor.LED(False)
 				for i in rascan.templates:
 					self.processor(i)
-
-				# confirmation = self.sensor.indentify(template[1]['Data'])
-				# time.sleep(0.5)
 			else:
 				self.sensor.LED(False)
 				break;
