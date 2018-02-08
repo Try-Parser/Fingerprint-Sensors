@@ -95,12 +95,19 @@ class App:
 			if len(rascan.templates) > 0:
 				if self.__capture_the_lights__():
 					self.sensor.LED(False)
+					confirmation = self.sensor.indentify(base64.b64decode(template[start]["fptemplate"].encode()))
 					# for i in rascan.templates:
 					threading.Thread(target=self.processor, args=(rascan.templates, 0,)).start()
 					threading.Thread(target=self.processor, args=(rascan.templates, 1,)).start()
 					threading.Thread(target=self.processor, args=(rascan.templates, 2,)).start()
 					threading.Thread(target=self.processor, args=(rascan.templates, 3,)).start()
 					threading.Thread(target=self.processor, args=(rascan.templates, 4,)).start()
+					threading.Thread(target=self.processor, args=(rascan.templates, 5,)).start()
+					threading.Thread(target=self.processor, args=(rascan.templates, 6,)).start()
+					threading.Thread(target=self.processor, args=(rascan.templates, 7,)).start()
+					threading.Thread(target=self.processor, args=(rascan.templates, 8,)).start()
+					threading.Thread(target=self.processor, args=(rascan.templates, 9,)).start()
+					threading.Thread(target=self.processor, args=(rascan.templates, 10,)).start()
 				else:
 					self.sensor.LED(False)
 					break;
@@ -115,11 +122,11 @@ class App:
 		print ("stop scanning")
 
 	def processor(self, template, start):
-		print(len(template))
+		print(len(template), start)
 		while start <= len(template):
 			confirmation = self.sensor.indentify(base64.b64decode(template[start]["fptemplate"].encode()))
 			print(confirmation)
 			if confirmation[1]["ACK"]:
 				print(template["user_id"])
 				print(template["id"])
-			start += 5
+			start = start + 10
