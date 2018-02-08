@@ -75,7 +75,7 @@ class Rascan:
 		elif resp == "re-init":
 			print("Re-initializing Sensor")
 			self.app.stopScan = True
-			time.sleep(0.1)
+			time.sleep(1)
 			self.app.stopScan = False
 			self.templates = []
 			self.initialize()
