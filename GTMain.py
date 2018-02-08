@@ -27,7 +27,7 @@ class App:
 	def __capture_the_lights__(self): 
 		while True:
 			procced = False
-
+			print(self.stopScan)
 			if self.stopScan:
 				return False
 
