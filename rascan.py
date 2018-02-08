@@ -70,7 +70,7 @@ class Rascan:
 					t2 = threading.Thread(target=self.app.scanLoop, args=(self,))
 					t2.start()
 		else:
-			print("aw")
+			print(resp)
 
 	def on_error(self, ws, error):
 		print(error)
