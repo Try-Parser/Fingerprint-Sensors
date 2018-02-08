@@ -96,7 +96,11 @@ class App:
 				if self.__capture_the_lights__():
 					self.sensor.LED(False)
 					# for i in rascan.templates:
-					self.multiPool.map(self.processor, rascan.templates)
+					threading.Thread(target=self.processor, args=(rascan.templates, 1,))
+					threading.Thread(target=self.processor, args=(rascan.templates, 2,))
+					threading.Thread(target=self.processor, args=(rascan.templates, 3,))
+					threading.Thread(target=self.processor, args=(rascan.templates, 4,))
+					threading.Thread(target=self.processor, args=(rascan.templates, 5,))
 				else:
 					self.sensor.LED(False)
 					break;
@@ -110,16 +114,10 @@ class App:
 		self.stopScan = False;
 		print ("stop scanning")
 
-	def processor(self, template):
-		confirmation = self.sensor.indentify(base64.b64decode(template["fptemplate"].encode()))
-		if confirmation[1]["ACK"]:
-			print(template["user_id"])
-			print(template["id"])
-			
-	def __getstate__(self):
-	    self_dict = self.__dict__.copy()
-	    del self_dict['multiPool']
-	    return self_dict
-
-	def __setstate__(self, state):
-	    self.__dict__.update(state)
+	def processor(self, template, start):
+		while start <= len(templates):
+			confirmation = self.sensor.indentify(base64.b64decode(template["fptemplate"][start].encode()))
+			if confirmation[1]["ACK"]:
+				print(template["user_id"])
+				print(template["id"])
+			start += 5
