@@ -95,7 +95,6 @@ class App:
 			if len(rascan.templates) > 0:
 				if self.__capture_the_lights__():
 					self.sensor.LED(False)
-					confirmation = self.sensor.indentify(base64.b64decode(template[start]["fptemplate"].encode()))
 					# for i in rascan.templates:
 					threading.Thread(target=self.processor, args=(rascan.templates, 0,)).start()
 					threading.Thread(target=self.processor, args=(rascan.templates, 1,)).start()
