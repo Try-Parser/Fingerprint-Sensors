@@ -48,6 +48,7 @@ class Rascan:
 
 	def on_message(self, ws, message):
 		templates = json.loads(message)
+		print(templates)
 		resp = templates["response"]
 		print(resp)
 		if resp != "ISR": 
@@ -71,7 +72,7 @@ class Rascan:
 					print("Check Starting")
 					c3 = threading.Thread(target=self.app.scanLoop, args=(self,))
 					c3.start()
-		elif resp == "re-init":
+		elif resp == "reinit":
 			print("Re-initializing Sensor")
 			self.app.stopScan = True
 			time.sleep(1)
