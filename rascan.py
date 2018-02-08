@@ -2,6 +2,7 @@ import websocket
 import json
 from GTMain import App
 import threading
+import time
 
 class Rascan:
 	def  __init__(self):
@@ -72,6 +73,7 @@ class Rascan:
 		else:
 			print("Enrollment Starting")
 			self.app.stopScan = True;
+			time.sleep(1)
 			e1 = threading.Thread(target=self.app.enroll, args=(self,))
 			e1.start()
 
