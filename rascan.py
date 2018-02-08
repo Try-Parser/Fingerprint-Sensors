@@ -48,7 +48,7 @@ class Rascan:
 	def on_message(self, ws, message):
 		templates = json.loads(message)
 		resp = templates["response"]
-		if resp <> "ISR": 
+		if resp != "ISR": 
 			if templates["message"] == "NFP":
 				self.templates.append(resp)
 				print("Enrollment Starting")
