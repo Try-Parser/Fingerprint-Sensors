@@ -113,3 +113,4 @@ class App:
 		confirmation = self.sensor.indentify(base64.b64decode(template["fptemplate"].encode()))
 		if confirmation[1]["ACK"]:
 			print(template["user_id"])
+			print(template["id"])
