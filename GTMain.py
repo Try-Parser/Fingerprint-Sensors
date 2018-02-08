@@ -117,6 +117,7 @@ class App:
 	def processor(self, template, start):
 		while start <= len(templates):
 			confirmation = self.sensor.indentify(base64.b64decode(template["fptemplate"][start].encode()))
+			print(confirmation)
 			if confirmation[1]["ACK"]:
 				print(template["user_id"])
 				print(template["id"])
