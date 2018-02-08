@@ -23,13 +23,12 @@ class App:
 		self.sensor.LED(False)	
 
 		self.template = ""
-		self.ctl = False
 
 	def __capture_the_lights__(self): 
 		while True:
 			procced = False
 
-			if self.ctl:
+			if self.stopScan:
 				return False
 
 			if self.sensor.senseFinger()[0]['Parameter'] == 0:
