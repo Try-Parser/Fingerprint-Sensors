@@ -76,6 +76,7 @@ class Rascan:
 			self.app.stopScan = True
 			time.sleep(1)
 			self.app.stopScan = False
+			self.templates = []
 			self.initialize()
 		else:
 			self.app.sensor.LED(False)
