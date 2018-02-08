@@ -118,7 +118,7 @@ class App:
 			
 	def __getstate__(self):
 	    self_dict = self.__dict__.copy()
-	    del self_dict['pool']
+	    del self_dict['multiPool']
 	    return self_dict
 
 	def __setstate__(self, state):
