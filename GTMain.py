@@ -96,7 +96,7 @@ class App:
 				if self.__capture_the_lights__():
 					self.sensor.LED(False)
 					for i in rascan.templates:
-						threading.Thread(target=self.processor, args=(i,))
+						threading.Thread(target=self.processor, args=(i,)).start()
 				else:
 					self.sensor.LED(False)
 					break;
