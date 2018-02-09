@@ -78,6 +78,7 @@ class Rascan:
 			self.app.stopScan = True
 			time.sleep(3)
 			self.app.stopScan = False
+			self.th = { "cs_0": [], "cs_1": [], "cs_2": [], "nfp_0":[] }
 			self.templates = []
 			self.initialize()
 		else:
