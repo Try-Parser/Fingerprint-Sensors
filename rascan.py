@@ -63,6 +63,7 @@ class Rascan:
 					self.templates.append(resp["results"][0])
 					if resp["from"] == resp["total"]-1:
 						print("Check Starting")
+						print(self.th)
 						self.th["cs_1"].append(threading.Thread(name="CS2", target=self.app.scanLoop, args=(self,)))
 						self.th["cs_1"][len(self.th["cs_1"])-1].start()
 					else:
