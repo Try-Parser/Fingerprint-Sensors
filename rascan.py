@@ -55,23 +55,23 @@ class Rascan:
 			if templates["message"] == "NFP":
 				self.templates.append(resp)
 				print("Check Starting")
-				self.th[0] = threading.Thread(name="CS1", target=self.app.scanLoop, args=(self,))
-				self.th[0].start()
+				CS0 = threading.Thread(name="CS1", target=self.app.scanLoop, args=(self,))
+				CS0.start()
 			else:
 				if templates["success"] == True and len(resp["results"]) > 0:
 					print("Inserting template to memory")
 					self.templates.append(resp["results"][0])
 					if resp["from"] == resp["total"]-1:
 						print("Check Starting")
-						self.th[1] = threading.Thread(name="CS2", target=self.app.scanLoop, args=(self,))
-						self.th[1].start()
+						CS1 = threading.Thread(name="CS2", target=self.app.scanLoop, args=(self,))
+						CS1.start()
 					else:
 						print(resp["from"])
 						print(resp["total"]-1)
 				else:
 					print("Check Starting")
-					self.th[2] = threading.Thread(name="CS3", target=self.app.scanLoop, args=(self,))
-					self.th[2].start()
+					CS2 = threading.Thread(name="CS3", target=self.app.scanLoop, args=(self,))
+					CS2.start()
 		elif resp == "re-init":
 			print("Re-initializing Sensor")
 			self.app.stopScan = True
@@ -86,8 +86,8 @@ class Rascan:
 			self.app.stopScan = True
 			time.sleep(3)
 			self.app.stopScan = False
-			self.th[3] = threading.Thread(name="NFP1", target=self.app.enroll, args=(self.ws,))
-			self.th[3].start()
+			NFP1 = threading.Thread(name="NFP1", target=self.app.enroll, args=(self.ws,))
+			NFP1.start()
 
 	def on_error(self, ws, error):
 		print(error)
