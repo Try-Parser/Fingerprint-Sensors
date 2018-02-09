@@ -98,8 +98,8 @@ class App:
 					for thread in threads:
 						thread.start()
 
-					for thread in threads:
-						thread.join()
+					# for thread in threads:
+					# 	thread.join()
 				else:
 					self.sensor.LED(False)
 					break;
