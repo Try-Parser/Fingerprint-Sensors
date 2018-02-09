@@ -99,7 +99,11 @@ class App:
 					for thread in threads:
 						thread.start()
 
-					time.sleep(5)
+					time.sleep(3)
+
+					for thread in threads:
+						thread.join()
+					
 					# while threading.active_count() != 3:
 					# 	print(threading.active_count(), " <- Active Account")
 					
