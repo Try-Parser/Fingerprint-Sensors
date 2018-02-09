@@ -108,7 +108,6 @@ class App:
 				break
 		
 		self.stopScan = False;
-		self.sensor.LED(False)
 		print ("Stop Scanning")
 
 	def processor(self, template, start):
