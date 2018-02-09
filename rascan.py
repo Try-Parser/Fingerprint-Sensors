@@ -57,7 +57,7 @@ class Rascan:
 				print("Check Starting")
 				c1 = threading.Thread(target=self.app.scanLoop, args=(self,))
 				c1.start()
-				c3.join()
+				c2.join()
 			else:
 				if templates["success"] == True and len(resp["results"]) > 0:
 					print("Inserting template to memory")
@@ -66,7 +66,7 @@ class Rascan:
 						print("Check Starting")
 						c2 = threading.Thread(target=self.app.scanLoop, args=(self,))
 						c2.start()
-						c3.join()
+						c2.join()
 					else:
 						print(resp["from"])
 						print(resp["total"]-1)
