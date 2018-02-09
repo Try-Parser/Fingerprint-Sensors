@@ -60,6 +60,7 @@ class App:
 			self.enroll(ws)
 
 		print ("terminitation")
+		time.sleep(3)
 		self.sensor.LED(False)
 		# self.sensor.close()
 		# exit(1)
