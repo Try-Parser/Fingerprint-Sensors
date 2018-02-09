@@ -114,7 +114,17 @@ class App:
 					p6.start()
 					p7.start()
 					p8.start()
-					p9.start()							
+					p9.start()						
+					p0.join()
+					p1.join()
+					p2.join()
+					p3.join()
+					p4.join()
+					p5.join()
+					p6.join()
+					p7.join()
+					p8.join()
+					p9.join()							
 				else:
 					self.sensor.LED(False)
 					break;
