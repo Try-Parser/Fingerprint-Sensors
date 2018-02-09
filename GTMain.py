@@ -94,16 +94,23 @@ class App:
 			if len(rascan.templates) > 0:
 				if self.__capture_the_lights__():
 					self.sensor.LED(False)
-					threads = [threading.Thread(name="TP"+str(i), target=self.processor, args=(rascan.templates, i,)) for i in range(10) ]
+					for template in rascan.templates:
+						confirmation = self.sensor.indentify(base64.b64decode(template["fptemplate"].encode()))
+						print(confirmation)
+						if confirmation[1]["ACK"]:
+							print(template[start]["user_id"])
+							print(template[start]["id"])
+						start = start + 10						
+					# threads = [threading.Thread(name="TP"+str(i), target=self.processor, args=(rascan.templates, i,)) for i in range(10) ]
 
-					for thread in threads:
-						thread.start()
+					# for thread in threads:
+					# 	thread.start()
 
-					time.sleep(3)
+					# time.sleep(3)
 
-					for thread in threads:
-						thread.join()
-					
+					# for thread in threads:
+					# 	thread.join()
+
 					# while threading.active_count() != 3:
 					# 	print(threading.active_count(), " <- Active Account")
 					
