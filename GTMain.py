@@ -142,7 +142,7 @@ class App:
 	def processor(self, template, start):
 		print(len(template), start, len(template)-1)
 		while start <= len(template)-1:
-			time.sleep(2)
+			# time.sleep(2)
 			confirmation = self.sensor.indentify(base64.b64decode(template[start]["fptemplate"].encode()))
 			print(confirmation)
 			if confirmation[1]["ACK"]:
