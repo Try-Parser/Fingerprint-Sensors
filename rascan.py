@@ -84,8 +84,8 @@ class Rascan:
 			print("Enrollment Starting")
 			self.app.stopScan = True
 			time.sleep(3)
-			self.app.stopScan = False
 			e1 = threading.Thread(target=self.app.enroll, args=(self.ws,))
+			self.app.stopScan = False
 			e1.start()
 
 	def on_error(self, ws, error):

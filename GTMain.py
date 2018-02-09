@@ -108,6 +108,8 @@ class App:
 
 			if self.stopScan:
 				break
+
+			# self.stopScan = False;
 		
 		print ("Stop Scanning")
 
