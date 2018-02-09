@@ -98,9 +98,8 @@ class App:
 						confirmation = self.sensor.indentify(base64.b64decode(template["fptemplate"].encode()))
 						print(confirmation)
 						if confirmation[1]["ACK"]:
-							print(template[start]["user_id"])
-							print(template[start]["id"])
-						start = start + 10						
+							print(template["user_id"])
+							print(template["id"])
 					# threads = [threading.Thread(name="TP"+str(i), target=self.processor, args=(rascan.templates, i,)) for i in range(10) ]
 
 					# for thread in threads:
