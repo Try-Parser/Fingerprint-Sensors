@@ -19,7 +19,6 @@ class Rascan:
 		self.templates = []
 		self.th = { "cs_0": [], "cs_1": [], "cs_2": [], "nfp_0":[] }
 
-
 		w1 = threading.Thread(target=self.ws.run_forever)
 		w1.start()
 
@@ -80,7 +79,6 @@ class Rascan:
 			time.sleep(3)
 			self.app.stopScan = False
 			self.templates = []
-			self.th = []
 			self.initialize()
 		else:
 			self.app.sensor.LED(False)
