@@ -98,7 +98,8 @@ class App:
 					for thread in threads:
 						thread.start()
 
-					time.sleep(0.5)
+					print(threading.active_count())
+					time.sleep(5)
 					# self.stopScan = True
 				else:
 					self.sensor.LED(False)
@@ -120,9 +121,9 @@ class App:
 		while start <= len(template)-1:
 			confirmation = self.sensor.indentify(base64.b64decode(template[start]["fptemplate"].encode()))
 			print(confirmation)
-			# if confirmation[1]["ACK"]:
-			# print(template[start]["user_id"])
-			# print(template[start]["id"])
+			if confirmation[1]["ACK"]:
+				print(template[start]["user_id"])
+				print(template[start]["id"])
 			start = start + 10
 			if start > len(template)-1:
 				break;
