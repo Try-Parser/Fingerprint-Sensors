@@ -149,11 +149,11 @@ class App:
 			print(template[start]["user_id"])
 			print(template[start]["id"])
 		# start = start + 10
-		
-    def __getstate__(self):
-        self_dict = self.__dict__.copy()
-        del self_dict['multiPool']
-        return self_dict
 
-    def __setstate__(self, state):
-        self.__dict__.update(state)
+	def __getstate__(self):
+		self_dict = self.__dict__.copy()
+		del self_dict['multiPool']
+		return self_dict
+
+	def __setstate__(self, state):
+		self.__dict__.update(state)
