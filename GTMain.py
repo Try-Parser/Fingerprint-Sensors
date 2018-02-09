@@ -96,7 +96,7 @@ class App:
 					# self.multiPool.map(self.processor, rascan.templates)
 					# for i in rascan.templates:
 
-					threads = [threading.Thread(name="TP"+i, target=self.processor, args=(rascan.templates, i,)) for i in range(10) ]
+					threads = [threading.Thread(name="TP"+str(i), target=self.processor, args=(rascan.templates, i,)) for i in range(10) ]
 
 					for thread in threads:
 						thread.start()
