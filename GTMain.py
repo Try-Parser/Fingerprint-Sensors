@@ -15,7 +15,7 @@ class App:
 
 		print(_initialization_response)
 
-		self.multiPool = Pool(5)
+		self.multiPool = Pool(10)
 		print ("Setting baudrate from 9600 to 57600")
 		baudrateResult = self.sensor.setBaudrate(57600)
 		print ("Setting is done testing for LED lights")
@@ -95,37 +95,38 @@ class App:
 			if len(rascan.templates) > 0:
 				if self.__capture_the_lights__():
 					self.sensor.LED(False)
+					self.multiPool.map(self.processor, rascan.templates)
 					# for i in rascan.templates:
-					p0 = threading.Thread(target=self.processor, args=(rascan.templates, 0,))
-					p1 = threading.Thread(target=self.processor, args=(rascan.templates, 1,))
-					p2 = threading.Thread(target=self.processor, args=(rascan.templates, 2,))
-					p3 = threading.Thread(target=self.processor, args=(rascan.templates, 3,))
-					p4 = threading.Thread(target=self.processor, args=(rascan.templates, 4,))
-					p5 = threading.Thread(target=self.processor, args=(rascan.templates, 5,))
-					p6 = threading.Thread(target=self.processor, args=(rascan.templates, 6,))
-					p7 = threading.Thread(target=self.processor, args=(rascan.templates, 7,))
-					p8 = threading.Thread(target=self.processor, args=(rascan.templates, 8,))
-					p9 = threading.Thread(target=self.processor, args=(rascan.templates, 9,))
-					p0.start()
-					p1.start()
-					p2.start()
-					p3.start()
-					p4.start()
-					p5.start()
-					p6.start()
-					p7.start()
-					p8.start()
-					p9.start()					
-					p0.join()
-					p1.join()
-					p2.join()
-					p3.join()
-					p4.join()
-					p5.join()
-					p6.join()
-					p7.join()
-					p8.join()
-					p9.join()
+					# p0 = threading.Thread(target=self.processor, args=(rascan.templates, 0,))
+					# p1 = threading.Thread(target=self.processor, args=(rascan.templates, 1,))
+					# p2 = threading.Thread(target=self.processor, args=(rascan.templates, 2,))
+					# p3 = threading.Thread(target=self.processor, args=(rascan.templates, 3,))
+					# p4 = threading.Thread(target=self.processor, args=(rascan.templates, 4,))
+					# p5 = threading.Thread(target=self.processor, args=(rascan.templates, 5,))
+					# p6 = threading.Thread(target=self.processor, args=(rascan.templates, 6,))
+					# p7 = threading.Thread(target=self.processor, args=(rascan.templates, 7,))
+					# p8 = threading.Thread(target=self.processor, args=(rascan.templates, 8,))
+					# p9 = threading.Thread(target=self.processor, args=(rascan.templates, 9,))
+					# p0.start()
+					# p1.start()
+					# p2.start()
+					# p3.start()
+					# p4.start()
+					# p5.start()
+					# p6.start()
+					# p7.start()
+					# p8.start()
+					# p9.start()					
+					# p0.join()
+					# p1.join()
+					# p2.join()
+					# p3.join()
+					# p4.join()
+					# p5.join()
+					# p6.join()
+					# p7.join()
+					# p8.join()
+					# p9.join()
 				else:
 					self.sensor.LED(False)
 					break;
@@ -139,12 +140,12 @@ class App:
 		self.stopScan = False;
 		print ("stop scanning")
 
-	def processor(self, template, start):
+	def processor(self, template):
 		print(len(template), start)
-		while start <= len(template)-1:
-			confirmation = self.sensor.indentify(base64.b64decode(template[start]["fptemplate"].encode()))
-			print(confirmation)
-			if confirmation[1]["ACK"]:
-				print(template[start]["user_id"])
-				print(template[start]["id"])
-			start = start + 10
+		# while start <= len(template)-1:
+		confirmation = self.sensor.indentify(base64.b64decode(template[start]["fptemplate"].encode()))
+		print(confirmation)
+		if confirmation[1]["ACK"]:
+			print(template[start]["user_id"])
+			print(template[start]["id"])
+		# start = start + 10
