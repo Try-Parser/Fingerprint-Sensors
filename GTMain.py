@@ -98,7 +98,8 @@ class App:
 					for thread in threads:
 						thread.start()
 
-					self.stopScan = True
+					time.sleep(0.5)
+					# self.stopScan = True
 				else:
 					self.sensor.LED(False)
 					break;
