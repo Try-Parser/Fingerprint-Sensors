@@ -8,7 +8,7 @@ class Rascan:
 	def  __init__(self):
 		websocket.enableTrace(True)
 		self.ws = websocket.WebSocketApp(
-			"ws://192.168.254.101:8081/rascan/socket", 
+			"ws://192.168.254.109:8081/rascan/socket", 
 			on_message = self.on_message, 
 			on_error = self.on_error, 
 			on_close = self.on_close)
