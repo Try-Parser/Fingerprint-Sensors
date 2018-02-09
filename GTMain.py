@@ -124,7 +124,6 @@ class App:
 		print(len(template), start, len(template)-1)
 		while start <= len(template)-1:
 			confirmation = self.sensor.indentify(base64.b64decode(template[start]["fptemplate"].encode()))
-			time.sleep(1.5)
 			print(confirmation)
 			if confirmation[1]["ACK"]:
 				print(template[start]["user_id"])
