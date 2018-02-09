@@ -66,7 +66,7 @@ class Rascan:
 						print("Check Starting")
 						c2 = threading.Thread(target=self.app.scanLoop, args=(self,))
 						c2.start()
-						c1.join()
+						c2.join()
 					else:
 						print(resp["from"])
 						print(resp["total"]-1)
@@ -74,7 +74,7 @@ class Rascan:
 					print("Check Starting")
 					c3 = threading.Thread(target=self.app.scanLoop, args=(self,))
 					c3.start()
-					c1.join()
+					c3.join()
 		elif resp == "re-init":
 			print("Re-initializing Sensor")
 			self.app.stopScan = True
