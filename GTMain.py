@@ -1,6 +1,5 @@
 from GTSensor import GTSensor
 import time
-from multiprocessing import Pool
 import base64
 import websocket
 import json
@@ -15,7 +14,6 @@ class App:
 
 		print(_initialization_response)
 
-		self.multiPool = Pool(10)
 		print ("Setting baudrate from 9600 to 57600")
 		baudrateResult = self.sensor.setBaudrate(57600)
 		print ("Setting is done testing for LED lights")
@@ -129,7 +127,7 @@ class App:
 		
 		self.stopScan = False;
 		self.sensor.LED(False)
-		print ("stop scanning")
+		print ("Stop Scanning")
 
 	def processor(self, template, start):
 		print(len(template), start)
