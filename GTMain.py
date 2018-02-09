@@ -98,7 +98,7 @@ class App:
 					for thread in threads:
 						thread.start()
 
-					print(threading.active_count(), <-- "Active Account")
+					print(threading.active_count(), " <- Active Account")
 					time.sleep(5)
 					# self.stopScan = True
 				else:
