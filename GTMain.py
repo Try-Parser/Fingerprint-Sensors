@@ -141,7 +141,7 @@ class App:
 		print ("stop scanning")
 
 	def processor(self, template):
-		print(len(template), start)
+		print(len(template))
 		# while start <= len(template)-1:
 		confirmation = self.sensor.indentify(base64.b64decode(template["fptemplate"].encode()))
 		print(confirmation)
