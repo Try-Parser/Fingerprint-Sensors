@@ -115,7 +115,17 @@ class App:
 					TP6.start()
 					TP7.start()
 					TP8.start()
-					TP9.start()
+					TP9.start()					
+					TP0.join()
+					TP1.join()
+					TP2.join()
+					TP3.join()
+					TP4.join()
+					TP5.join()
+					TP6.join()
+					TP7.join()
+					TP8.join()
+					TP9.join()
 				else:
 					self.sensor.LED(False)
 					break;
@@ -134,6 +144,7 @@ class App:
 		print(len(template), start, len(template)-1)
 		while start <= len(template)-1:
 			confirmation = self.sensor.indentify(base64.b64decode(template[start]["fptemplate"].encode()))
+			time.sleep(1.5)
 			print(confirmation)
 			if confirmation[1]["ACK"]:
 				print(template[start]["user_id"])
