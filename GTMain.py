@@ -143,11 +143,11 @@ class App:
 	def processor(self, template):
 		print(len(template), start)
 		# while start <= len(template)-1:
-		confirmation = self.sensor.indentify(base64.b64decode(template[start]["fptemplate"].encode()))
+		confirmation = self.sensor.indentify(base64.b64decode(template["fptemplate"].encode()))
 		print(confirmation)
 		if confirmation[1]["ACK"]:
-			print(template[start]["user_id"])
-			print(template[start]["id"])
+			print(template["user_id"])
+			print(template["id"])
 		# start = start + 10
 
 	def __getstate__(self):
