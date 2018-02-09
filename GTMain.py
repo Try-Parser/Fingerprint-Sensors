@@ -93,9 +93,6 @@ class App:
 			if len(rascan.templates) > 0:
 				if self.__capture_the_lights__():
 					self.sensor.LED(False)
-					# self.multiPool.map(self.processor, rascan.templates)
-					# for i in rascan.templates:
-
 					threads = [threading.Thread(name="TP"+str(i), target=self.processor, args=(rascan.templates, i,)) for i in range(10) ]
 
 					for thread in threads:
@@ -103,49 +100,6 @@ class App:
 
 					for thread in threads:
 						thread.join()
-					# TP0 = threading.Thread(name="TP0", target=self.processor, args=(rascan.templates, 0,))
-					# TP1 = threading.Thread(name="TP1", target=self.processor, args=(rascan.templates, 1,))
-					# TP2 = threading.Thread(name="TP2", target=self.processor, args=(rascan.templates, 2,))
-					# TP3 = threading.Thread(name="TP3", target=self.processor, args=(rascan.templates, 3,))
-					# TP4 = threading.Thread(name="TP4", target=self.processor, args=(rascan.templates, 4,))
-					# TP5 = threading.Thread(name="TP5", target=self.processor, args=(rascan.templates, 5,))
-					# TP6 = threading.Thread(name="TP6", target=self.processor, args=(rascan.templates, 6,))
-					# TP7 = threading.Thread(name="TP7", target=self.processor, args=(rascan.templates, 7,))
-					# TP8 = threading.Thread(name="TP8", target=self.processor, args=(rascan.templates, 8,))
-					# TP9 = threading.Thread(name="TP9", target=self.processor, args=(rascan.templates, 9,))
-
-					# TP0.setDaemon(True)
-					# TP1.setDaemon(True)
-					# TP2.setDaemon(True)
-					# TP3.setDaemon(True)
-					# TP4.setDaemon(True)
-					# TP5.setDaemon(True)
-					# TP6.setDaemon(True)
-					# TP7.setDaemon(True)
-					# TP8.setDaemon(True)
-					# TP9.setDaemon(True)	
-
-					# TP0.start()
-					# TP1.start()
-					# TP2.start()
-					# TP3.start()
-					# TP4.start()
-					# TP5.start()
-					# TP6.start()
-					# TP7.start()
-					# TP8.start()
-					# TP9.start()	
-
-					# TP0.join()
-					# TP1.join()
-					# TP2.join()
-					# TP3.join()
-					# TP4.join()
-					# TP5.join()
-					# TP6.join()
-					# TP7.join()
-					# TP8.join()
-					# TP9.join()
 				else:
 					self.sensor.LED(False)
 					break;
@@ -163,7 +117,7 @@ class App:
 	def processor(self, template, start):
 		print(len(template), start, len(template)-1)
 		while start <= len(template)-1:
-			print(template[start]["fptemplate"])
+			print(base64.b64decode(template[start]["fptemplate"].encode()))
 			confirmation = self.sensor.indentify(base64.b64decode(template[start]["fptemplate"].encode()))
 			print(confirmation)
 			if confirmation[1]["ACK"]:
