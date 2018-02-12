@@ -78,7 +78,7 @@ class Rascan:
 			self.app.stopScan = True
 			time.sleep(3)
 			self.app.stopScan = False
-			threading.Thread(name="NFP1", target=self.app.enroll, args=(cmd["id"], self.ws, )).start()
+			threading.Thread(name=str(uuid.uuid4()), target=self.app.enroll, args=(cmd["id"], self.ws, )).start()
 
 	def on_error(self, ws, error):
 		print(error)
