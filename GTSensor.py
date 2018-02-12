@@ -217,7 +217,7 @@ class GTSensor:
 		else: 
 			raise RuntimeError("Couldn't send packet")
 
-		self.serial.timeout = 10
+		self.serial.timeout = 5
 		data = self.receivedData(498)
 		self.serial.timeout = self.usb_timeout
 
@@ -229,7 +229,7 @@ class GTSensor:
 		else:
 			raise RuntimeError("Couldn't send packet.")
 
-		self.serial.timeout = 10
+		self.serial.timeout = 5
 		data = self.receivedData(498)
 		self.serial.timeout = self.usb_timeout
 
