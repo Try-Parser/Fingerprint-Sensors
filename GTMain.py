@@ -136,6 +136,8 @@ class App:
 		if not stresponse[0]["ACK"] and not stresponse[1]["ACK"]:
 			ws.send('{ "command": "error",  "message": "'+stresponse[0]["Parameter"]+', "id":"'+str(tempID)+'",}')
 
+		print(stresponse)
+
 	# def enroll(self, ws):
 	# 	self.sensor.LED(True)
 	# 	time.sleep(0.1)

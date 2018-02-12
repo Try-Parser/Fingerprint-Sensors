@@ -16,7 +16,6 @@ class Rascan:
 		self.app = App()
 		self.ws.on_open = self.on_open
 		self.terminator = False
-		self.templates = []
 		self.sth = []
 		self.ctr = 0
 
@@ -29,15 +28,27 @@ class Rascan:
 		print(resp)
 		if resp != "ISR" and resp != "re-init": 
 			if templates["message"] == "NFP":
+				print("Template synchronizing")
+				self.sth.append(
+					threading.Thread(
+						name="", 
+						target=self.app.setTemplate, 
+						args=(resp["fptemplate"], resp["user_id"], self.ws, )))
+				self.sth[self.ctr].start()
+				self.sth[self.ctr].join()
+				self.ctr += 1
 				print("Check Starting")
-				threading.Thread(name="CS1", target=self.app.scanLoop, args=()).start()
+				threading.Thread(name="CS1", target=self.app.scan, args=()).start()
 			else:
 				if templates["success"] == True and len(resp["results"]) > 0:
 					self.sth.append(
 						threading.Thread(
 							name="", 
 							target=self.app.setTemplate, 
-							args=(resp["results"][0]["fptemplate"], resp["results"][0]["users"]["id"], self.ws, )))
+							args=(
+								resp["results"][0]["fptemplate"],
+								resp["results"][0]["users"]["id"],
+								self.ws, )))
 					self.sth[0].start()
 					self.sth[0].join()
 					self.ctr += 1
@@ -55,7 +66,6 @@ class Rascan:
 			self.app.stopScan = True
 			time.sleep(3)
 			self.app.stopScan = False
-			self.templates = []
 			self.initialize()
 		else:
 			cmd = json.loads(templates["message"])
