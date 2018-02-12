@@ -41,8 +41,10 @@ class App:
 
 	def enroll(self):
 		confirmation = self.sensor.startEnrollment(0)
-		print(confirmation)
-
+		if confirmation["ACK"]:
+			self.sensor.LED(True)
+			efr = self.sensor.enrollmentFirst()
+				print(efr)
 
 	# def enroll(self, ws):
 	# 	self.sensor.LED(True)
