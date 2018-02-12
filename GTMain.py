@@ -111,10 +111,10 @@ class App:
 
 	def generateTemplate(self, tempId):
 		template = self.sensor.generateTemplateById(tempId)
-		if template["ACK"]:
+		if template[0]["ACK"]:
 			print(template)
 		else:
-			if template["Parameter"] == "NACK_IS_NOT_USED":
+			if template[0]["Parameter"] == "NACK_IS_NOT_USED":
 				print(tempId +" is not used.")
 			else:
 				print(tempId +" must be 0 <> 999.")
