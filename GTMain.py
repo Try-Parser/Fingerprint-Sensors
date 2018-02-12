@@ -39,29 +39,34 @@ class App:
 				if self.sensor.captureFinger(True)['ACK']:
 					return True
 
-	def enroll(self, ws):
-		self.sensor.LED(True)
-		time.sleep(0.1)
-		if self.__capture_the_lights__():
-			template = self.sensor.genTemplate()
-			print(template[0])
-			print(template[1])
+	def enroll(self):
+		confirmation = self.sensor.startEnrollment(0)
+		print(confirmation)
 
-			time.sleep(0.2)
-			if self.__capture_the_lights__():
-				confirmation = self.sensor.indentify(template[1]['Data'])
-				print (confirmation)
-				if confirmation[1]["ACK"] == True:
-					ws.send('{ "command": "save", "template": "'+ base64.b64encode(template[1]["Data"]).decode() +'", "message": "Finger Template is confirmed"}')
-				else:
-					ws.send('{ "command": "IFPT", "message": "failed to acknowledge the finger template!"}')
-					# self.enroll(ws)
-		else:
-			self.enroll(ws)
 
-		print ("terminitation")
-		time.sleep(3)
-		self.sensor.LED(False)
+	# def enroll(self, ws):
+	# 	self.sensor.LED(True)
+	# 	time.sleep(0.1)
+	# 	if self.__capture_the_lights__():
+	# 		template = self.sensor.genTemplate()
+	# 		print(template[0])
+	# 		print(template[1])
+
+	# 		time.sleep(0.2)
+	# 		if self.__capture_the_lights__():
+	# 			confirmation = self.sensor.indentify(template[1]['Data'])
+	# 			print (confirmation)
+	# 			if confirmation[1]["ACK"] == True:
+	# 				ws.send('{ "command": "save", "template": "'+ base64.b64encode(template[1]["Data"]).decode() +'", "message": "Finger Template is confirmed"}')
+	# 			else:
+	# 				ws.send('{ "command": "IFPT", "message": "failed to acknowledge the finger template!"}')
+	# 				# self.enroll(ws)
+	# 	else:
+	# 		self.enroll(ws)
+
+	# 	print ("terminitation")
+	# 	time.sleep(3)
+	# 	self.sensor.LED(False)
 		# self.sensor.close()
 		# exit(1)
 
@@ -87,58 +92,58 @@ class App:
 
 	# 	print ("stop scanning")
 
-	def scanLoop(self, rascan):
-		while not self.stopScan:
-			self.sensor.LED(True)
-			time.sleep(0.5)
-			if len(rascan.templates) > 0:
-				if self.__capture_the_lights__():
-					self.sensor.LED(False)
-					# for template in rascan.templates:
-					# 	confirmation = self.sensor.indentify(base64.b64decode(template["fptemplate"].encode()))
-					# 	print(confirmation)
-					# 	if confirmation[1]["ACK"]:
-					# 		print(template["user_id"])
-					# 		print(template["id"])
-					threads = [threading.Thread(name="TP"+str(i), target=self.processor, args=(rascan.templates, i,)) for i in range(10) ]
+	# def scanLoop(self, rascan):
+	# 	while not self.stopScan:
+	# 		self.sensor.LED(True)
+	# 		time.sleep(0.5)
+	# 		if len(rascan.templates) > 0:
+	# 			if self.__capture_the_lights__():
+	# 				self.sensor.LED(False)
+	# 				# for template in rascan.templates:
+	# 				# 	confirmation = self.sensor.indentify(base64.b64decode(template["fptemplate"].encode()))
+	# 				# 	print(confirmation)
+	# 				# 	if confirmation[1]["ACK"]:
+	# 				# 		print(template["user_id"])
+	# 				# 		print(template["id"])
+	# 				threads = [threading.Thread(name="TP"+str(i), target=self.processor, args=(rascan.templates, i,)) for i in range(10) ]
 
-					for thread in threads:
-						thread.start()
+	# 				for thread in threads:
+	# 					thread.start()
 
-					time.sleep(3)
+	# 				time.sleep(3)
 
-					for thread in threads:
-						thread.join()
+	# 				for thread in threads:
+	# 					thread.join()
 
-					# while threading.active_count() != 3:
-					# 	print(threading.active_count(), " <- Active Account")
+	# 				# while threading.active_count() != 3:
+	# 				# 	print(threading.active_count(), " <- Active Account")
 					
-					# self.stopScan = True
-				else:
-					self.sensor.LED(False)
-					break;
-			else:
-				rascan.ws.send('{ "command": "error", "message": "No Templates available or the rascan is not initialized properly!"}')
-				self.stopScan = True;
+	# 				# self.stopScan = True
+	# 			else:
+	# 				self.sensor.LED(False)
+	# 				break;
+	# 		else:
+	# 			rascan.ws.send('{ "command": "error", "message": "No Templates available or the rascan is not initialized properly!"}')
+	# 			self.stopScan = True;
 
-			if self.stopScan:
-				break
+	# 		if self.stopScan:
+	# 			break
 
-			# self.stopScan = False;
+	# 		# self.stopScan = False;
 		
-		print ("Stop Scanning")
+	# 	print ("Stop Scanning")
 
-	def processor(self, template, start):
-		print(len(template), start, len(template)-1)
+	# def processor(self, template, start):
+	# 	print(len(template), start, len(template)-1)
 
-		while start <= len(template)-1:
-			confirmation = self.sensor.indentify(base64.b64decode(template[start]["fptemplate"].encode()))
-			print(confirmation)
-			if confirmation[1]["ACK"]:
-				print(template[start]["user_id"])
-				print(template[start]["id"])
-			start = start + 10
-			if start > len(template)-1:
-				break;
+	# 	while start <= len(template)-1:
+	# 		confirmation = self.sensor.indentify(base64.b64decode(template[start]["fptemplate"].encode()))
+	# 		print(confirmation)
+	# 		if confirmation[1]["ACK"]:
+	# 			print(template[start]["user_id"])
+	# 			print(template[start]["id"])
+	# 		start = start + 10
+	# 		if start > len(template)-1:
+	# 			break;
 
-		print(start, "End")
+	# 	print(start, "End")
