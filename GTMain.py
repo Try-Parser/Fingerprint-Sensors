@@ -43,8 +43,9 @@ class App:
 		confirmation = self.sensor.startEnrollment(0)
 		if confirmation["ACK"]:
 			self.sensor.LED(True)
-			efr = self.sensor.enrollmentFirst()
-			print(efr)
+			if self.__capture_the_lights__():
+				efr = self.sensor.enrollmentFirst()
+				print(efr)
 
 	# def enroll(self, ws):
 	# 	self.sensor.LED(True)
