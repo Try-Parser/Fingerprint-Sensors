@@ -66,7 +66,7 @@ class App:
 									elif efr["Parameter"] == "NACK_BAD_FINGER":
 										print("Bad fingprint captured.")
 									else:
-										print(tempId +" is Already used and duplication occur.!")
+										print(str(tempId) +" is Already used and duplication occur.!")
 						else:
 							if efr["Parameter"] == "NACK_ENROLL_FAILED":
 								print("Failed to enroll please try again")
@@ -81,9 +81,9 @@ class App:
 			if confirmation["Parameter"] == "NACK_DB_IS_FULL":
 				print("Database is full.")
 			elif confirmation["Parameter"] == "NACK_INVALID_POS":
-				print(tempId +" must be 0 <> 999.")
+				print(str(tempId) +" must be 0 <> 999.")
 			else:
-				print(tempId +" is Already used.")
+				print(str(tempId) +" is Already used.")
 		
 		self.sensor.LED(False)
 		print("Enroll terminitation.")
@@ -98,9 +98,9 @@ class App:
 	def delete(self, tempId):
 		de = self.sensor.rmById(tempId)
 		if de["ACK"]:
-			print(tempId + " is Successfully deleted.")
+			print(str(tempId) + " is Successfully deleted.")
 		elif not de["ACK"] and de["Parameter"] == "NACK_IS_NOT_USED":
-			print(tempId + " is available.")
+			print(str(tempId) + " is available.")
 
 	def deleteAll(self):
 		de = self.sensor.rmAll()
@@ -115,9 +115,9 @@ class App:
 			print(template)
 		else:
 			if template[0]["Parameter"] == "NACK_IS_NOT_USED":
-				print(tempId +" is not used.")
+				print(str(tempId) +" is not used.")
 			else:
-				print(tempId +" must be 0 <> 999.")
+				print(str(tempId) +" must be 0 <> 999.")
 
 	# def enroll(self, ws):
 	# 	self.sensor.LED(True)
