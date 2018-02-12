@@ -68,7 +68,7 @@ class Rascan:
 			time.sleep(3)
 			self.app.stopScan = False
 			self.initialize()
-		else:
+		elif resp == "ISR":
 			cmd = json.loads(templates["message"])
 			self.app.sensor.LED(False)
 			print("Enrollment Starting")
