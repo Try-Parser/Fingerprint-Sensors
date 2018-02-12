@@ -58,7 +58,7 @@ class App:
 	def scan(self):
 		self.sensor.LED(True)
 		if self.__capture_the_lights__():
-			indentify = self.sensor.indentify()
+			indentify = self.sensor.security()
 			print(indentify)
 			self.sensor.LED(True)
 

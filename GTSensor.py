@@ -201,7 +201,7 @@ class GTSensor:
 		else:
 			raise RuntimeError("Couldn't send packet.")
 
-	def identify(self):
+	def security(self):
 		if self.writePacket(GT521F5.IDENTIFICATION.value, GT521F5.DEFAULT.value):
 			return self.receivedPacket()
 		else:
