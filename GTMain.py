@@ -119,12 +119,10 @@ class App:
 			else:
 				print(str(tempId) +" must be 0 <> 999.")
 
-	def setTemplate(self, template, tempID):
+	def setTemplate(self, template, tempID, ws):
 		stresponse = self.sensor.setTemplate(base64.b64decode(template.encode()), tempID)
-		# if stresponse[0]["ACK"]:
-		# 	if stresponse[1]["ACK"]:
-		print(stresponse)
-
+		if not stresponse[0]["ACK"] and not stresponse[1]["ACK"]:
+			ws.send('{ "command": "error",  "message": "'+stresponse[0]["Parameter"]+', "id":"'+tempID+'",}')
 
 	# def enroll(self, ws):
 	# 	self.sensor.LED(True)
