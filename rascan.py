@@ -77,9 +77,14 @@ class Rascan:
 			self.app.stopScan = True
 			time.sleep(4)
 			self.app.stopScan = False
-			threading.Thread(name=str(uuid.uuid4()), target=self.app.enroll, args=(cmd["id"], self.ws, )).start()
-			time.sleep(4)
-			threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=()).start()
+			self.sth.append(threading.Thread(name=str(uuid.uuid4()), target=self.app.enroll, args=(cmd["id"], self.ws, )))
+			self.sth[self.ctr].start()
+			self.sth[self.ctr].join()
+			self.ctr += 1		
+			self.sth.append(threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=()))
+			self.sth[self.ctr].start()
+			self.sth[self.ctr].join()
+			self.ctr += 1
 
 	def on_error(self, ws, error):
 		print(error)
