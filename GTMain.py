@@ -39,7 +39,7 @@ class App:
 				if self.sensor.captureFinger(True)['ACK']:
 					return True
 
-	def enroll(self, tempId):
+	def enroll(self, tempId, ws):
 		confirmation = self.sensor.startEnrollment(tempId)
 		if confirmation["ACK"]:
 			self.sensor.LED(True)

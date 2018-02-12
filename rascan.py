@@ -31,7 +31,6 @@ class Rascan:
 			if templates["message"] == "NFP":
 				print("Check Starting")
 				threading.Thread(name="CS1", target=self.app.scanLoop, args=()).start()
-				self.th["cs_0"][len(self.th["cs_0"])-1].start()
 			else:
 				if templates["success"] == True and len(resp["results"]) > 0:
 					self.sth.append(
@@ -59,14 +58,13 @@ class Rascan:
 			self.templates = []
 			self.initialize()
 		else:
-			print(templates)
+			cmd = json.loads(templates["message"])
 			self.app.sensor.LED(False)
 			print("Enrollment Starting")
 			self.app.stopScan = True
 			time.sleep(3)
 			self.app.stopScan = False
-			NFP1 = threading.Thread(name="NFP1", target=self.app.enroll, args=(tempId, self.ws, ))
-			NFP1.start()
+			threading.Thread(name="NFP1", target=self.app.enroll, args=(cmd["id"], self.ws, )).start()
 
 	def on_error(self, ws, error):
 		print(error)
