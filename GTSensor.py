@@ -275,7 +275,7 @@ class GTSensor:
 		else:
 			raise RuntimeError("Couldn't send packet.")
 
-		if self.writeData(template):
+		if self.writeData(template, 498):
 			response_data = self.receivedPacket()
 		else:
 			raise RuntimeError("Couldn't send packet (data)")
