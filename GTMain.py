@@ -63,7 +63,7 @@ class App:
 			self.sensor.LED(True)
 
 	def delete(self, tempId):
-		de = self.rmById(tempId)
+		de = self.sensor.rmById(tempId)
 		print(de)
 
 	# def enroll(self, ws):
