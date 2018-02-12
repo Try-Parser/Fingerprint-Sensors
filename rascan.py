@@ -31,19 +31,19 @@ class Rascan:
 				print("Template synchronizing")
 				self.sth.append(
 					threading.Thread(
-						name="", 
+						name=str(uuid.uuid4()), 
 						target=self.app.setTemplate, 
 						args=(resp["fptemplate"], resp["user_id"], self.ws, )))
 				self.sth[self.ctr].start()
 				self.sth[self.ctr].join()
 				self.ctr += 1
 				print("Check Starting")
-				threading.Thread(name="CS1", target=self.app.scan, args=()).start()
+				threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=()).start()
 			else:
 				if templates["success"] == True and len(resp["results"]) > 0:
 					self.sth.append(
 						threading.Thread(
-							name="", 
+							name=str(uuid.uuid4()), 
 							target=self.app.setTemplate, 
 							args=(
 								resp["results"][0]["fptemplate"],
@@ -54,13 +54,13 @@ class Rascan:
 					self.ctr += 1
 					if resp["from"] == resp["total"]-1:
 						print("Check Starting")
-						threading.Thread(name="CS2", target=self.app.scan, args=()).start()
+						threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=()).start()
 					else:
 						print(resp["from"])
 						print(resp["total"]-1)
 				else:
 					print("Check Starting")
-					threading.Thread(name="CS3", target=self.app.scan, args=()).start()
+					threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=()).start()
 		elif resp == "re-init":
 			print("Re-initializing Sensor")
 			self.app.stopScan = True
