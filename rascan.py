@@ -49,8 +49,8 @@ class Rascan:
 								resp["results"][0]["fptemplate"],
 								resp["results"][0]["users"]["id"],
 								self.ws, )))
-					self.sth[0].start()
-					self.sth[0].join()
+					self.sth[self.ctr].start()
+					self.sth[self.ctr].join()
 					self.ctr += 1
 					if resp["from"] == resp["total"]-1:
 						print("Check Starting")
