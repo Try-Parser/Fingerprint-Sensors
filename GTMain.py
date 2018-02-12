@@ -66,6 +66,10 @@ class App:
 		de = self.sensor.rmById(tempId)
 		print(de)
 
+	def deleteAll(self):
+		de = self.sensor.rmAll()
+		print(de)
+
 	# def enroll(self, ws):
 	# 	self.sensor.LED(True)
 	# 	time.sleep(0.1)
