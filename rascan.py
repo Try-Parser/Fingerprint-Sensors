@@ -68,7 +68,7 @@ class Rascan:
 		elif resp == "re-init":
 			print("Re-initializing Sensor")
 			self.app.stopScan = True
-			time.sleep(3)
+			time.sleep(2)
 			self.app.stopScan = False
 			self.initialize()
 		elif resp == "ISR":
@@ -76,7 +76,7 @@ class Rascan:
 			self.app.sensor.LED(False)
 			print("Enrollment Starting")
 			self.app.stopScan = True
-			time.sleep(3)
+			time.sleep(2)
 			self.app.stopScan = False
 			threading.Thread(name=str(uuid.uuid4()), target=self.app.enroll, args=(cmd["id"], self.ws, )).start()
 
