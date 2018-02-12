@@ -3,6 +3,7 @@ import json
 from GTMain import App
 import threading
 import time
+import uuid
 
 class Rascan:
 	def  __init__(self):
