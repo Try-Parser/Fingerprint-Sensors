@@ -29,9 +29,8 @@ class Rascan:
 		print(resp)
 		if resp != "ISR" and resp != "re-init": 
 			if templates["message"] == "NFP":
-				self.templates.append(resp)
 				print("Check Starting")
-				self.th["cs_0"].append(threading.Thread(name="CS1", target=self.app.scanLoop, args=(self,)))
+				threading.Thread(name="CS1", target=self.app.scanLoop, args=(self,)).start()
 				self.th["cs_0"][len(self.th["cs_0"])-1].start()
 			else:
 				if templates["success"] == True and len(resp["results"]) > 0:
@@ -51,9 +50,7 @@ class Rascan:
 						print(resp["total"]-1)
 				else:
 					print("Check Starting")
-					cs_2 = self.th["cs_2"]
-					self.th["cs_2"].append(threading.Thread(name="CS3", target=self.app.scanLoop, args=(self,)))
-					self.th["cs_2"][len(self.th["cs_2"])-1].start()
+					threading.Thread(name="CS3", target=self.app.scan, args=(self,)).start()
 		elif resp == "re-init":
 			print("Re-initializing Sensor")
 			self.app.stopScan = True
@@ -62,12 +59,13 @@ class Rascan:
 			self.templates = []
 			self.initialize()
 		else:
+			print(templates)
 			self.app.sensor.LED(False)
 			print("Enrollment Starting")
 			self.app.stopScan = True
 			time.sleep(3)
 			self.app.stopScan = False
-			NFP1 = threading.Thread(name="NFP1", target=self.app.enroll, args=(self.ws,))
+			NFP1 = threading.Thread(name="NFP1", target=self.app.enroll, args=(tempId, self.ws, ))
 			NFP1.start()
 
 	def on_error(self, ws, error):
