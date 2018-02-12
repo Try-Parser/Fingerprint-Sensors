@@ -45,7 +45,9 @@ class App:
 			self.sensor.LED(True)
 			if self.__capture_the_lights__():
 				efr = self.sensor.enrollmentFirst()
-				print(efr)
+				if efr["ACK"]:
+					esr = self.sensor.enrollmentSecond()
+					print(esr)
 
 	# def enroll(self, ws):
 	# 	self.sensor.LED(True)
