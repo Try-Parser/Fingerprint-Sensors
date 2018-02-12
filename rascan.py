@@ -38,7 +38,7 @@ class Rascan:
 					self.sth.append(threading.Thread(name="", target=self.app.setTemplate, args=(resp["results"][0]["fptemplate"], resp["results"][0]["users"]["id"], )))
 					self.sth[0].start()
 					self.sth[0].join()
-					self.ctr++
+					self.ctr += 1
 					# self.app.setTemplate(resp["results"][0]["fptemplate"])
 					# print("Inserting template to memory")
 					# self.templates.append(resp["results"][0])
