@@ -120,7 +120,7 @@ class App:
 				print(str(tempId) +" must be 0 <> 999.")
 
 	def setTemplate(self, template, tempID):
-		stresponse = self.sensor.setTemplate(template, tempID)
+		stresponse = self.sensor.setTemplate(base64.b64decode(template.encode()), tempID)
 		# if stresponse[0]["ACK"]:
 		# 	if stresponse[1]["ACK"]:
 		print(stresponse)
