@@ -127,7 +127,8 @@ class GTSensor:
 		self.serial.flush()
 		return result
 
-	# commands
+	# commands ------------------------------------------------------------------------------
+
 	def initialize(self, extra_info = False, check_baudrate = False):
 		if check_baudrate:
 			self.serial.timeout = 0.5
@@ -154,7 +155,7 @@ class GTSensor:
 		return [response, data]
 
 
-	#Enrolling ----------------------------------
+	# Enrolling -----------------------------------------------------------------------------
 
 	def startEnrollment(self, templateID):
 		if self.writePacket(GT521F5.START_ENROLL.value, templateID):
@@ -180,7 +181,7 @@ class GTSensor:
 		else:
 			raise RuntimeError("Couldn't send packet.")
 
-	#Deletion ----------------------------------
+	# Deletion -----------------------------------------------------------------------------
 
 	def rmById(self, templateID):
 		if self.writePacket(GT521F5.DELETE_FP_ID.value, templateID):
@@ -194,7 +195,8 @@ class GTSensor:
 		else:
 			raise self.receivedPacket()
 
-	#Verification | Identification
+	# Verification | Identification --------------------------------------------------------
+
 	def verify(self, templateID):
 		if self.writePacket(GT521F5.VERIFICATION.value, templateID):
 			return self.receivedPacket()
@@ -207,7 +209,33 @@ class GTSensor:
 		else:
 			raise RuntimeError("Couldn't send packet.")
 
-	#Utilities ---------------------------------
+	# Template generation -------------------------------------------------------------------
+
+	def generateTemplateById(self, tempID):
+		if self.writePacket(GT521F5.GET_TEMPLATE.value, tempID)
+			response = self.receivedPacket()
+		else: 
+			raise RuntimeError("Couldn't send packet")
+
+		self.serial.timeout = 10
+		data = self.receivedData(498)
+		self.serial.timeout = self.usb_timeout
+
+		return [response, data]
+
+	def genTemplate(self):
+		if self.writePacket(GT521F5.MAKE_TEMPLATE.value, GT521F5.DEFAULT.value):
+			response = self.receivedPacket()
+		else:
+			raise RuntimeError("Couldn't send packet.")
+
+		self.serial.timeout = 10
+		data = self.receivedData(498)
+		self.serial.timeout = self.usb_timeout
+
+		return [response, data]
+
+	# Utilities -----------------------------------------------------------------------------
 
 	def close(self):
 		if self.writePacket(GT521F5.CLOSE.value, GT521F5.DEFAULT.value):
@@ -238,19 +266,6 @@ class GTSensor:
 			return self.receivedPacket()
 		else:
 			raise RuntimeError("Couldn't send packet.")
-
-	def genTemplate(self):
-		if self.writePacket(GT521F5.MAKE_TEMPLATE.value, GT521F5.DEFAULT.value):
-			response = self.receivedPacket()
-		else:
-			raise RuntimeError("Couldn't send packet.")
-
-		self.serial.timeout = 10
-		data = self.receivedData(498)
-		self.serial.timeout = self.usb_timeout
-
-		return [response, data]
-
 
 	def indentify(self, template):
 		if self.writePacket(GT521F5.IDENTIFY_TEMPLATE.value, GT521F5.IDENTIFY_TEMPLATE_PARAM.value):

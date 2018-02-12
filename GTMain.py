@@ -45,14 +45,19 @@ class App:
 			self.sensor.LED(True)
 			if self.__capture_the_lights__():
 				efr = self.sensor.enrollmentFirst()
+				self.sensor.LED(False)
+				time.sleep(2)
 				if efr["ACK"]:
+					self.sensor.LED(True)
 					if self.__capture_the_lights__():
 						esr = self.sensor.enrollmentSecond()
-						print(esr)
+						self.sensor.LED(False)
+						time.sleep(2)
 						if esr["ACK"]:
+							self.sensor.LED(True)
 							if self.__capture_the_lights__():
 								etr = self.sensor.enrollmentThird()
-								print(etr)
+								self.sensor.LED(False)
 								if etr["ACK"]:
 									print("Successfully enrolled.")
 								else:
@@ -79,6 +84,9 @@ class App:
 				print(tempId +" must be 0 <> 999.")
 			else:
 				print(tempId +" is Already used.")
+		
+		self.sensor.LED(False)
+		print("Enroll terminitation.")
 
 	def scan(self):
 		self.sensor.LED(True)
@@ -99,7 +107,11 @@ class App:
 		if de["ACK"]:
 			print("Successfull Deletion.")
 		elif not de["ACK"] and de["Parameter"] == "NACK_DB_IS_EMPTY":
-			print("Already emtpy")
+			print("Already emtpy.")
+
+	def generateTemplate(self, tempId):
+		template = self.sensor.generateTemplateById(tempId)
+		print(template)
 
 	# def enroll(self, ws):
 	# 	self.sensor.LED(True)
