@@ -30,7 +30,7 @@ class Rascan:
 		if resp != "ISR" and resp != "re-init": 
 			if templates["message"] == "NFP":
 				print("Check Starting")
-				threading.Thread(name="CS1", target=self.app.scanLoop, args=(self,)).start()
+				threading.Thread(name="CS1", target=self.app.scanLoop, args=()).start()
 				self.th["cs_0"][len(self.th["cs_0"])-1].start()
 			else:
 				if templates["success"] == True and len(resp["results"]) > 0:
@@ -50,7 +50,7 @@ class Rascan:
 						print(resp["total"]-1)
 				else:
 					print("Check Starting")
-					threading.Thread(name="CS3", target=self.app.scan, args=(self,)).start()
+					threading.Thread(name="CS3", target=self.app.scan, args=()).start()
 		elif resp == "re-init":
 			print("Re-initializing Sensor")
 			self.app.stopScan = True
