@@ -35,7 +35,7 @@ class Rascan:
 				self.th["cs_0"][len(self.th["cs_0"])-1].start()
 			else:
 				if templates["success"] == True and len(resp["results"]) > 0:
-					self.sth[self.ctr] = threading.Thread(name="", target=self.app.setTemplate, args=(resp["results"][0]["fptemplate"], resp["results"][0]["users"]["id"], )
+					self.sth[self.ctr] = threading.Thread(name="", target=self.app.setTemplate, args=(resp["results"][0]["fptemplate"], resp["results"][0]["users"]["id"], ))
 					print(self.sth)
 					# self.sth[0].start()
 					# self.sth[0].join()
