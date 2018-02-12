@@ -36,9 +36,10 @@ class Rascan:
 			else:
 				if templates["success"] == True and len(resp["results"]) > 0:
 					self.sth[self.ctr] = threading.Thread(name="", target=self.app.setTemplate, args=(resp["results"][0]["fptemplate"], resp["results"][0]["users"]["id"], )
-					self.sth[0].start()
-					self.sth[0].join()
-					self.ctr++;
+					print(self.sth[self.ctr])
+					# self.sth[0].start()
+					# self.sth[0].join()
+					# self.ctr++;
 					# self.app.setTemplate(resp["results"][0]["fptemplate"])
 					# print("Inserting template to memory")
 					# self.templates.append(resp["results"][0])
