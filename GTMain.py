@@ -111,7 +111,13 @@ class App:
 
 	def generateTemplate(self, tempId):
 		template = self.sensor.generateTemplateById(tempId)
-		print(template)
+		if template["ACK"]:
+			print(template)
+		else:
+			if template["Parameter"] == "NACK_IS_NOT_USED":
+				print(tempId +" is not used.")
+			else:
+				print(tempId +" must be 0 <> 999.")
 
 	# def enroll(self, ws):
 	# 	self.sensor.LED(True)
