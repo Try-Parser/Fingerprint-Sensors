@@ -40,7 +40,7 @@ class App:
 					return True
 
 	def enroll(self):
-		confirmation = self.sensor.startEnrollment(0)
+		confirmation = self.sensor.startEnrollment(1)
 		if confirmation["ACK"]:
 			self.sensor.LED(True)
 			if self.__capture_the_lights__():
