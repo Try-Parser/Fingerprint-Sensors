@@ -154,6 +154,61 @@ class GTSensor:
 		return [response, data]
 
 
+	#Enrolling ----------------------------------
+
+	def startEnrollment(self, templateID):
+		if self.writePacket(GT521F5.START_ENROLL.value, templateID):
+			return self.receivedPacket()
+		else:
+			raise RuntimeError("Couldn't send packet.")
+
+	def enrollmentFirst(self):
+		if self.writePacket(GT521F5.FIRST_ENROLL.value,  GT521F5.DEFAULT.value):
+			return self.receivedPacket()
+		else:
+			raise RuntimeError("Couldn't send packet.")
+
+	def enrollmentSecond(self):
+		if self.writePacket(GT521F5.SECOND_ENROLL.value, GT521F5.DEFAULT.value):
+			return self.receivedPacket()
+		else:
+			raise RuntimeError("Couldn't send packet.")
+
+	def enrollmentThird(self):
+		if self.writePacket(GT521F5.THIRD_MATCH_SAVE.value, GT521F5.DEFAULT.value):
+			return self.receivedPacket()
+		else:
+			raise RuntimeError("Couldn't send packet.")
+
+	#Deletion ----------------------------------
+
+	def rmById(self, templateID):
+		if self.writePacket(GT521F5.DELETE_FP_ID.value, templateID):
+			return self.receivedPacket()
+		else:
+			raise RuntimeError("Couldn't send packet.")
+
+	def rmAll(self):
+		if self.writePacket(GT521F5.DELETE_FP_ALL.value, GT521F5.DEFAULT.value):
+			return self.receivedPacket()
+		else:
+			raise self.receivedPacket()
+
+	#Verification | Identification
+	def verify(self, templateID):
+		if self.writePacket(GT521F5.VERIFICATION.value, templateID):
+			return self.receivedPacket()
+		else:
+			raise RuntimeError("Couldn't send packet.")
+
+	def identify(self):
+		if self.writePacket(GT521F5.IDENTIFICATION.value, GT521F5.DEFAULT.value):
+			return self.receivedPacket()
+		else:
+			raise RuntimeError("Couldn't send packet.")
+
+	#Utilities ---------------------------------
+
 	def close(self):
 		if self.writePacket(GT521F5.CLOSE.value, GT521F5.DEFAULT.value):
 			return self.receivedPacket()

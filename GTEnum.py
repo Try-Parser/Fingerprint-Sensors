@@ -52,6 +52,9 @@ class GT521F5(Enum):
     DELETE_FP_ID               = 0x40
     DELETE_FP_ALL              = 0x41
 
+    VERIFICATION               = 0x50
+    IDENTIFICATION             = 0x51
+
     DETECT_FINGER              = 0x26
     CAPTURE_IMAGE              = 0x60
     MAKE_TEMPLATE              = 0x61
