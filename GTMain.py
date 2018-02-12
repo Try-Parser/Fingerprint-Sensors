@@ -55,6 +55,12 @@ class App:
 								etr = self.sensor.enrollmentThird()
 								print(etr)
 
+	def scan(self):
+		if self.__capture_the_lights__():
+			indentify = self.sensor.indentify()
+			print(indentify)
+
+
 
 	# def enroll(self, ws):
 	# 	self.sensor.LED(True)
