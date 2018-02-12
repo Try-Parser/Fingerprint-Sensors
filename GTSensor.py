@@ -212,7 +212,7 @@ class GTSensor:
 	# Template generation -------------------------------------------------------------------
 
 	def generateTemplateById(self, tempID):
-		if self.writePacket(GT521F5.GET_TEMPLATE.value, tempID)
+		if self.writePacket(GT521F5.GET_TEMPLATE.value, tempID):
 			response = self.receivedPacket()
 		else: 
 			raise RuntimeError("Couldn't send packet")
