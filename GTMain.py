@@ -75,7 +75,7 @@ class App:
 		else:
 			if confirmation["Parameter"] == "NACK_DB_IS_FULL":
 				print("Database is full.")
-			elif confirmation["Parameter"] == "NACK_INVALID_POS"
+			elif confirmation["Parameter"] == "NACK_INVALID_POS":
 				print(tempId +" must be 0 <> 999.")
 			else:
 				print(tempId +" is Already used.")
