@@ -29,7 +29,7 @@ class Rascan:
 		print(resp)
 		if resp != "ISR" and resp != "re-init": 
 			if templates["message"] == "NFP":
-				self.sensor.stopScan = True
+				self.app.stopScan = True
 				print("Template synchronizing")
 				self.sth.append(
 					threading.Thread(
@@ -40,7 +40,7 @@ class Rascan:
 				self.sth[self.ctr].join()
 				self.ctr += 1
 				time.sleep(2)
-				self.sensor.stopScan = False
+				self.app.stopScan = False
 				print("Check Starting")
 				threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=()).start()
 			else:
