@@ -63,7 +63,7 @@ class App:
 									template = self.generateTemplate(tempId)
 									print(template)
 									if template[0][0]["ACK"]:
-										ws.send('{ "command": "save", "template": "'+ base64.b64encode(template[0][1]["Data"]).decode() +'", "id":"'+tempId+'", "message": "Finger Template is confirmed"}')
+										ws.send('{ "command": "save", "template": "'+ base64.b64encode(template[0][1]["Data"]).decode() +'", "id":'+str(tempId)+', "message": "Finger Template is confirmed"}')
 									else:
 										ws.send(template[1])
 								else:
