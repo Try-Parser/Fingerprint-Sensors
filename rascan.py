@@ -78,7 +78,7 @@ class Rascan:
 
 	def initialize(self):
 		self.ws.send('{"command": "initialize"}')
-		resp = self.sensor.deleteAll()
+		resp = self.app.deleteAll()
 		print(resp)
 		print("### Initializing Rascan ###")
 
