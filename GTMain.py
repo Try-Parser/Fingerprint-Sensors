@@ -58,7 +58,7 @@ class App:
 								else:
 									if efr["Parameter"] == "NACK_ENROLL_FAILED":
 										print("Failed to enroll please try again")
-									elif efr["Parameter"] == "NACK_BAD_FINGER"
+									elif efr["Parameter"] == "NACK_BAD_FINGER":
 										print("Bad fingprint captured.")
 									else:
 										print(tempId +" is Already used and duplication occur.!")
