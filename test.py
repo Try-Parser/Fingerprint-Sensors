@@ -2,4 +2,4 @@ from GTMain import App
 
 
 if __name__ == '__main__':
-	App().generateTemplate(1)
+	App().generateTemplate(0)
