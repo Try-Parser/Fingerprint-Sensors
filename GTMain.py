@@ -89,11 +89,15 @@ class App:
 		print("Enroll terminitation.")
 
 	def scan(self):
-		self.sensor.LED(True)
-		if self.__capture_the_lights__():
-			indentify = self.sensor.security()
-			print(indentify)
+		while not self.stopScan:
 			self.sensor.LED(True)
+			if self.__capture_the_lights__():
+				indentify = self.sensor.security()
+				print(indentify)
+				self.sensor.LED(True)
+			else:
+				self.sensor.LED(False)
+				break;
 
 	def delete(self, tempId):
 		de = self.sensor.rmById(tempId)
@@ -122,6 +126,7 @@ class App:
 	def setTemplate(self, template, tempID, ws):
 		stresponse = self.sensor.setTemplate(base64.b64decode(template.encode()), tempID)
 		if not stresponse[0]["ACK"] and not stresponse[1]["ACK"]:
+			print("Yeah")
 			ws.send('{ "command": "error",  "message": "'+stresponse[0]["Parameter"]+', "id":"'+str(tempID)+'",}')
 
 	# def enroll(self, ws):

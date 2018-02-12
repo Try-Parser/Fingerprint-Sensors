@@ -43,14 +43,9 @@ class Rascan:
 					self.sth[0].start()
 					self.sth[0].join()
 					self.ctr += 1
-					# self.app.setTemplate(resp["results"][0]["fptemplate"])
-					# print("Inserting template to memory")
-					# self.templates.append(resp["results"][0])
 					if resp["from"] == resp["total"]-1:
 						print("Check Starting")
-						print(self.th)
-						self.th["cs_1"].append(threading.Thread(name="CS2", target=self.app.scanLoop, args=(self,)))
-						self.th["cs_1"][len(self.th["cs_1"])-1].start()
+						threading.Thread(name="CS2", target=self.app.scan, args=()).start()
 					else:
 						print(resp["from"])
 						print(resp["total"]-1)
