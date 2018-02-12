@@ -56,11 +56,11 @@ class App:
 								print(etr)
 
 	def scan(self):
+		self.sensor.LED(True)
 		if self.__capture_the_lights__():
 			indentify = self.sensor.indentify()
 			print(indentify)
-
-
+			self.sensor.LED(True)
 
 	# def enroll(self, ws):
 	# 	self.sensor.LED(True)
