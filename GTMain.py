@@ -119,6 +119,13 @@ class App:
 			else:
 				print(str(tempId) +" must be 0 <> 999.")
 
+	def setTemplate(self, template, tempID):
+		stresponse = self.sensor.setTemplate()
+		# if stresponse[0]["ACK"]:
+		# 	if stresponse[1]["ACK"]:
+				print(stresponse)
+
+
 	# def enroll(self, ws):
 	# 	self.sensor.LED(True)
 	# 	time.sleep(0.1)

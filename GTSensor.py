@@ -267,6 +267,21 @@ class GTSensor:
 		else:
 			raise RuntimeError("Couldn't send packet.")
 
+	# Setting with templates ---------------------------------------------------------------
+
+	def setTemplate(self, template, templateID):
+		if self.writePacket(GT521F5.SET_TEMPLATE.value, templateID):
+			response = self.receivedPacket()
+		else:
+			raise RuntimeError("Couldn't send packet.")
+
+		if self.writeData(template):
+			response_data = self.receivedPacket()
+		else:
+			raise RuntimeError("Couldn't send packet (data)")
+
+		return [response, response_data]
+
 	def indentify(self, template):
 		if self.writePacket(GT521F5.IDENTIFY_TEMPLATE.value, GT521F5.IDENTIFY_TEMPLATE_PARAM.value):
 			response = self.receivedPacket()

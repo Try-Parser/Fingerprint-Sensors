@@ -17,34 +17,11 @@ class Rascan:
 		self.ws.on_open = self.on_open
 		self.terminator = False
 		self.templates = []
-		self.th = { "cs_0": [], "cs_1": [], "cs_2": [], "nfp_0":[] }
+		self.sth = []
+		self.ctr = 0
 
 		w1 = threading.Thread(target=self.ws.run_forever)
 		w1.start()
-
-	# def on_message(self, ws, message):
-	# 	templates = json.loads(message)
-	# 	resp = templates["response"]
-	# 	if templates["message"] == "NFP":
-	# 		self.templates.append(resp)
-	# 		print("Enrollment Starting")
-	# 		t4 = threading.Thread(target=self.app.enroll, args=(self.ws,))
-	# 		t4.start()
-	# 	else:
-	# 		if templates["success"] == True and len(resp["results"]) > 0:
-	# 			print("Inserting template to memory")
-	# 			self.templates.append(resp["results"][0])
-	# 			if resp["from"] == resp["total"]-1:
-	# 				print("Enrollment Starting")
-	# 				t3 = threading.Thread(target=self.app.enroll, args=(self.ws,))
-	# 				t3.start()
-	# 			else:
-	# 				print(resp["from"])
-	# 				print(resp["total"]-1)
-	# 		else:
-	# 			print("Enrollment Starting")
-	# 			t2 = threading.Thread(target=self.app.enroll, args=(self.ws,))
-	# 			t2.start()
 
 	def on_message(self, ws, message):
 		templates = json.loads(message)
@@ -58,8 +35,13 @@ class Rascan:
 				self.th["cs_0"][len(self.th["cs_0"])-1].start()
 			else:
 				if templates["success"] == True and len(resp["results"]) > 0:
-					print("Inserting template to memory")
-					self.templates.append(resp["results"][0])
+					self.sth[self.ctr] = threading.Thread(name="", target=self.app.setTemplate, args=(resp["results"][0]["fptemplate"], resp["results"][0]["users"]["id"], )
+					self.sth[self.ctr].start()
+					self.sth[self.ctr].join()
+					self.ctr++;
+					# self.app.setTemplate(resp["results"][0]["fptemplate"])
+					# print("Inserting template to memory")
+					# self.templates.append(resp["results"][0])
 					if resp["from"] == resp["total"]-1:
 						print("Check Starting")
 						print(self.th)
@@ -78,7 +60,6 @@ class Rascan:
 			self.app.stopScan = True
 			time.sleep(3)
 			self.app.stopScan = False
-			self.th = { "cs_0": [], "cs_1": [], "cs_2": [], "nfp_0":[] }
 			self.templates = []
 			self.initialize()
 		else:
