@@ -39,13 +39,12 @@ class App:
 				if self.sensor.captureFinger(True)['ACK']:
 					return True
 
-	def enroll(self):
-		confirmation = self.sensor.startEnrollment(1)
+	def enroll(self, tempId):
+		confirmation = self.sensor.startEnrollment(tempId)
 		if confirmation["ACK"]:
 			self.sensor.LED(True)
 			if self.__capture_the_lights__():
 				efr = self.sensor.enrollmentFirst()
-				print(efr)
 				if efr["ACK"]:
 					if self.__capture_the_lights__():
 						esr = self.sensor.enrollmentSecond()
@@ -54,6 +53,32 @@ class App:
 							if self.__capture_the_lights__():
 								etr = self.sensor.enrollmentThird()
 								print(etr)
+								if etr["ACK"]:
+									print("Successfully enrolled.")
+								else:
+									if efr["Parameter"] == "NACK_ENROLL_FAILED":
+										print("Failed to enroll please try again")
+									elif efr["Parameter"] == "NACK_BAD_FINGER"
+										print("Bad fingprint captured.")
+									else:
+										print(tempId +" is Already used and duplication occur.!")
+						else:
+							if efr["Parameter"] == "NACK_ENROLL_FAILED":
+								print("Failed to enroll please try again")
+							else:
+								print("Bad fingprint captured.")
+				else:
+					if efr["Parameter"] == "NACK_ENROLL_FAILED":
+						print("Failed to enroll please try again")
+					else:
+						print("Bad fingprint captured.")
+		else:
+			if confirmation["Parameter"] == "NACK_DB_IS_FULL":
+				print("Database is full.")
+			elif confirmation["Parameter"] == "NACK_INVALID_POS"
+				print(tempId +" must be 0 <> 999.")
+			else:
+				print(tempId +" is Already used.")
 
 	def scan(self):
 		self.sensor.LED(True)
@@ -64,11 +89,17 @@ class App:
 
 	def delete(self, tempId):
 		de = self.sensor.rmById(tempId)
-		print(de)
+		if de["ACK"]:
+			print(tempId + " is Successfully deleted.")
+		elif not de["ACK"] and de["Parameter"] == "NACK_IS_NOT_USED":
+			print(tempId + " is available.")
 
 	def deleteAll(self):
 		de = self.sensor.rmAll()
-		print(de)
+		if de["ACK"]:
+			print("Successfull Deletion.")
+		elif not de["ACK"] and de["Parameter"] == "NACK_DB_IS_EMPTY":
+			print("Already emtpy")
 
 	# def enroll(self, ws):
 	# 	self.sensor.LED(True)
