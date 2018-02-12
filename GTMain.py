@@ -60,6 +60,11 @@ class App:
 								self.sensor.LED(False)
 								if etr["ACK"]:
 									print("Successfully enrolled.")
+									template = self.generateTemplate(tempId)
+									if template[0]["ACK"]:
+										ws.send('{ "command": "save", "template": "'+ base64.b64encode(template[0][1]["Data"]).decode() +'", "id":"'+tempId+'", "message": "Finger Template is confirmed"}')
+									else:
+										ws.send(template[1])
 								else:
 									if efr["Parameter"] == "NACK_ENROLL_FAILED":
 										print("Failed to enroll please try again")
@@ -116,17 +121,18 @@ class App:
 	def generateTemplate(self, tempId):
 		template = self.sensor.generateTemplateById(tempId)
 		if template[0]["ACK"]:
-			print(template)
+			return [template, None];
 		else:
 			if template[0]["Parameter"] == "NACK_IS_NOT_USED":
 				print(str(tempId) +" is not used.")
+				return [template, '{"command": "error", "message": '+str(tempId) +'" is not used."}']
 			else:
 				print(str(tempId) +" must be 0 <> 999.")
+				return [template, '{"command": "error", "message": '+str(tempId) +'"  must be 0 <> 999."}']
 
 	def setTemplate(self, template, tempID, ws):
 		stresponse = self.sensor.setTemplate(base64.b64decode(template.encode()), tempID)
 		if not stresponse[0]["ACK"] and not stresponse[1]["ACK"]:
-			print("Yeah")
 			ws.send('{ "command": "error",  "message": "'+stresponse[0]["Parameter"]+', "id":"'+str(tempID)+'",}')
 
 	# def enroll(self, ws):
