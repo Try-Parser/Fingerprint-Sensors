@@ -123,7 +123,7 @@ class App:
 		stresponse = self.sensor.setTemplate()
 		# if stresponse[0]["ACK"]:
 		# 	if stresponse[1]["ACK"]:
-				print(stresponse)
+		print(stresponse)
 
 
 	# def enroll(self, ws):
