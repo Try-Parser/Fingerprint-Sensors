@@ -68,9 +68,9 @@ class Rascan:
 					print("Check Starting")
 					threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=()).start()
 
-	    if resp == "run_scan":
+		if resp == "run_scan":
 			print("Check Starting")
-	    	threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=()).start()
+			threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=()).start()
 
 		if resp == "RIS":
 			print("Re-initializing Sensor")
