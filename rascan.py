@@ -28,7 +28,7 @@ class Rascan:
 		resp = templates["response"]
 		print(resp)
 
-		if resp != "ISR" and resp != "RIS": 
+		if resp != "NRS" and resp != "RIS": 
 			if templates["message"] == "NFP":
 				self.app.stopScan = True
 				print("Template synchronizing")
@@ -74,7 +74,7 @@ class Rascan:
 			self.app.stopScan = False
 			self.initialize()
 
-		if resp == "ISR":
+		if resp == "NRS":
 			cmd = json.loads(templates["message"])
 			self.app.sensor.LED(False)
 			print("Enrollment Starting")
