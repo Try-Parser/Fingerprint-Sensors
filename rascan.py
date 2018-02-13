@@ -103,7 +103,7 @@ class Rascan:
 		self.initialize()
 
 	def initialize(self):
-		self.ws.send('{"command": "IS", "type": "scanner"}')
+		self.ws.send('{"command": "IS", "type": "stream"}')
 		resp = self.app.deleteAll()
 		print(resp)
 		print("### Initializing Rascan ###")
