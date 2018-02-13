@@ -76,7 +76,7 @@ class Rascan:
 			self.app.sensor.LED(False)
 			print("Enrollment Starting")
 			self.app.stopScan = True
-			time.sleep(4)
+			time.sleep(2)
 			self.app.stopScan = False
 			self.sth.append(threading.Thread(name=str(uuid.uuid4()), target=self.app.enroll, args=(cmd["id"], self.ws, )))
 			self.sth[self.ctr].start()
