@@ -145,6 +145,6 @@ class App:
 	def setTemplate(self, template, tempID, ws):
 		stresponse = self.sensor.setTemplate(base64.b64decode(template.encode()), tempID)
 		if not stresponse[0]["ACK"] and not stresponse[1]["ACK"]:
-			ws.send('{ "command": "error",  "message": "'+stresponse[0]["Parameter"]+', "id":"'+str(tempID)+'",}')
+			ws.send('{ "command": "error",  "message": "'+stresponse[0]["Parameter"]+'", "id":"'+str(tempID)+'" }')
 
 		print(stresponse)
