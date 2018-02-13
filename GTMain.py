@@ -95,10 +95,10 @@ class App:
 				ws.send('{ "command": "error", "message": "Database is full.", "id": "'+str(tempId)+'"}')
 				print("Database is full.")
 			elif confirmation["Parameter"] == "NACK_INVALID_POS":
-				ws.send('{ "command": "error", "message": "'+str(tempID)+'" must be 0 <> 999.", "id": "'+str(tempId)+'"}')
+				ws.send('{ "command": "error", "message": "'+str(tempId)+'" must be 0 <> 999.", "id": "'+str(tempId)+'"}')
 				print(str(tempId) +" must be 0 <> 999.")
 			else:
-				ws.send('{ "command": "error", "message": "'+str(tempID)+'" is Already used.", "id": "'+str(tempId)+'"}')
+				ws.send('{ "command": "error", "message": "'+str(tempId)+'" is Already used.", "id": "'+str(tempId)+'"}')
 				print(str(tempId) +" is Already used.")
 		
 		self.sensor.LED(False)
