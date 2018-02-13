@@ -27,6 +27,7 @@ class Rascan:
 		templates = json.loads(message)
 		resp = templates["response"]
 		print(resp)
+
 		if resp != "ISR" and resp != "re-init": 
 			if templates["message"] == "NFP":
 				self.app.stopScan = True
@@ -65,13 +66,15 @@ class Rascan:
 				else:
 					print("Check Starting")
 					threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=()).start()
-		elif resp == "re-init":
+
+		if resp == "re-init":
 			print("Re-initializing Sensor")
 			self.app.stopScan = True
 			time.sleep(4)
 			self.app.stopScan = False
 			self.initialize()
-		elif resp == "ISR":
+
+		if resp == "ISR":
 			cmd = json.loads(templates["message"])
 			self.app.sensor.LED(False)
 			print("Enrollment Starting")
@@ -82,8 +85,7 @@ class Rascan:
 			self.sth[self.ctr].start()
 			self.sth[self.ctr].join()
 			self.ctr += 1
-			time.sleep(4)
-			threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=()).start()
+
 
 	def on_error(self, ws, error):
 		print(error)
@@ -96,7 +98,7 @@ class Rascan:
 		self.initialize()
 
 	def initialize(self):
-		self.ws.send('{"command": "init", "type": "scanner"}')
+		self.ws.send('{"command": "IS", "type": "scanner"}')
 		resp = self.app.deleteAll()
 		print(resp)
 		print("### Initializing Rascan ###")
