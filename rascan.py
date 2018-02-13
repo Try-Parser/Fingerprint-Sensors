@@ -12,7 +12,8 @@ class Rascan:
 			"ws://192.168.254.103:8081/rascan/socket", 
 			on_message = self.on_message, 
 			on_error = self.on_error, 
-			on_close = self.on_close)
+			on_close = self.on_close,
+			header = {'type:sensor'})
 
 		self.app = App()
 		self.ws.on_open = self.on_open
@@ -28,7 +29,7 @@ class Rascan:
 		resp = templates["response"]
 		print(resp)
 
-		if resp != "NRS" and resp != "RIS": 
+		if resp != "NRS" and resp != "RIS" and resp != "run_scan": 
 			if templates["message"] == "NFP":
 				self.app.stopScan = True
 				print("Template synchronizing")
@@ -66,6 +67,10 @@ class Rascan:
 				else:
 					print("Check Starting")
 					threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=()).start()
+
+	    if resp = "run_scan":
+			print("Check Starting")
+	    	threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=()).start()
 
 		if resp == "RIS":
 			print("Re-initializing Sensor")
