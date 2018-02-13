@@ -85,7 +85,6 @@ class Rascan:
 			time.sleep(2)
 			self.sth.append(threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=()))
 			self.sth[self.ctr].start()
-			self.sth[self.ctr].join()
 			self.ctr += 1
 
 	def on_error(self, ws, error):
