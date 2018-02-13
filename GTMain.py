@@ -62,7 +62,7 @@ class App:
 									print("Successfully enrolled.")
 									template = self.generateTemplate(tempId)
 									if template[0][0]["ACK"]:
-										payload = '{ "command": "save", "template": "'+ base64.b64encode(template[0][1]["Data"]).decode() +'", "id":'+str(tempId)+', "message": "Finger Template is confirmed"}'
+										payload = '{ "command": "ST", "template": "'+ base64.b64encode(template[0][1]["Data"]).decode() +'", "id":'+str(tempId)+', "message": "Finger Template is confirmed"}'
 										print(payload)
 										ws.send(payload)
 									else:
