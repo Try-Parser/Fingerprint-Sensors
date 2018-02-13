@@ -68,27 +68,37 @@ class App:
 										ws.send(template[1])
 								else:
 									if efr["Parameter"] == "NACK_ENROLL_FAILED":
+										ws.send('{ "command": "error", "message": "Failed to enroll please try again.", "id": "'+str(tempId)+'"}')
 										print("Failed to enroll please try again")
 									elif efr["Parameter"] == "NACK_BAD_FINGER":
+										ws.send('{ "command": "error", "message": "Bad fingprint captured.", "id": "'+str(tempId)+'"}')
 										print("Bad fingprint captured.")
 									else:
+										ws.send('{ "command": "error", "message": "'+str(tempId)+'" is Already used and duplication occur.", "id": "'+str(tempId)+'"}')
 										print(str(tempId) +" is Already used and duplication occur.!")
 						else:
 							if efr["Parameter"] == "NACK_ENROLL_FAILED":
+								ws.send('{ "command": "error", "message": "Failed to enroll please try again.", "id": "'+str(tempId)+'"}')
 								print("Failed to enroll please try again")
 							else:
+								ws.send('{ "command": "error", "message": "Bad fingprint captured.", "id": "'+str(tempId)+'"}')
 								print("Bad fingprint captured.")
 				else:
 					if efr["Parameter"] == "NACK_ENROLL_FAILED":
+						ws.send('{ "command": "error", "message": "Failed to enroll please try again.", "id": "'+str(tempId)+'"}')
 						print("Failed to enroll please try again")
 					else:
+						ws.send('{ "command": "error", "message": "Bad fingprint captured.", "id": "'+str(tempId)+'"}')
 						print("Bad fingprint captured.")
 		else:
 			if confirmation["Parameter"] == "NACK_DB_IS_FULL":
+				ws.send('{ "command": "error", "message": "Database is full.", "id": "'+str(tempId)+'"}')
 				print("Database is full.")
 			elif confirmation["Parameter"] == "NACK_INVALID_POS":
+				ws.send('{ "command": "error", "message": "'+str(tempID)+'" must be 0 <> 999.", "id": "'+str(tempId)+'"}')
 				print(str(tempId) +" must be 0 <> 999.")
 			else:
+				ws.send('{ "command": "error", "message": "'+str(tempID)+'" is Already used.", "id": "'+str(tempId)+'"}')
 				print(str(tempId) +" is Already used.")
 		
 		self.sensor.LED(False)
@@ -137,107 +147,3 @@ class App:
 			ws.send('{ "command": "error",  "message": "'+stresponse[0]["Parameter"]+', "id":"'+str(tempID)+'",}')
 
 		print(stresponse)
-
-	# def enroll(self, ws):
-	# 	self.sensor.LED(True)
-	# 	time.sleep(0.1)
-	# 	if self.__capture_the_lights__():
-	# 		template = self.sensor.genTemplate()
-	# 		print(template[0])
-	# 		print(template[1])
-
-	# 		time.sleep(0.2)
-	# 		if self.__capture_the_lights__():
-	# 			confirmation = self.sensor.indentify(template[1]['Data'])
-	# 			print (confirmation)
-	# 			if confirmation[1]["ACK"] == True:
-	# 				ws.send('{ "command": "save", "template": "'+ base64.b64encode(template[1]["Data"]).decode() +'", "message": "Finger Template is confirmed"}')
-	# 			else:
-	# 				ws.send('{ "command": "IFPT", "message": "failed to acknowledge the finger template!"}')
-	# 				# self.enroll(ws)
-	# 	else:
-	# 		self.enroll(ws)
-
-	# 	print ("terminitation")
-	# 	time.sleep(3)
-	# 	self.sensor.LED(False)
-		# self.sensor.close()
-		# exit(1)
-
-
-	# def security(self, templates):
-	# 	self.multiPool.map(self.processor, templates)
-
-	# def scanLoop(self):
-	# 	while not self.stopScan:
-	# 		self.sensor.LED(True)
-	# 		time.sleep(0.5)
-	# 		if self.__capture_the_lights__():
-	# 			template = self.sensor.genTemplate()
-	# 			self.sensor.LED(False)
-	# 			time.sleep(0.5)
-	# 			print(template)
-	# 		else:
-	# 			self.sensor.LED(False)
-	# 			break;
-
-	# 		if self.stopScan:
-	# 			break
-
-	# 	print ("stop scanning")
-
-	# def scanLoop(self, rascan):
-	# 	while not self.stopScan:
-	# 		self.sensor.LED(True)
-	# 		time.sleep(0.5)
-	# 		if len(rascan.templates) > 0:
-	# 			if self.__capture_the_lights__():
-	# 				self.sensor.LED(False)
-	# 				# for template in rascan.templates:
-	# 				# 	confirmation = self.sensor.indentify(base64.b64decode(template["fptemplate"].encode()))
-	# 				# 	print(confirmation)
-	# 				# 	if confirmation[1]["ACK"]:
-	# 				# 		print(template["user_id"])
-	# 				# 		print(template["id"])
-	# 				threads = [threading.Thread(name="TP"+str(i), target=self.processor, args=(rascan.templates, i,)) for i in range(10) ]
-
-	# 				for thread in threads:
-	# 					thread.start()
-
-	# 				time.sleep(3)
-
-	# 				for thread in threads:
-	# 					thread.join()
-
-	# 				# while threading.active_count() != 3:
-	# 				# 	print(threading.active_count(), " <- Active Account")
-					
-	# 				# self.stopScan = True
-	# 			else:
-	# 				self.sensor.LED(False)
-	# 				break;
-	# 		else:
-	# 			rascan.ws.send('{ "command": "error", "message": "No Templates available or the rascan is not initialized properly!"}')
-	# 			self.stopScan = True;
-
-	# 		if self.stopScan:
-	# 			break
-
-	# 		# self.stopScan = False;
-		
-	# 	print ("Stop Scanning")
-
-	# def processor(self, template, start):
-	# 	print(len(template), start, len(template)-1)
-
-	# 	while start <= len(template)-1:
-	# 		confirmation = self.sensor.indentify(base64.b64decode(template[start]["fptemplate"].encode()))
-	# 		print(confirmation)
-	# 		if confirmation[1]["ACK"]:
-	# 			print(template[start]["user_id"])
-	# 			print(template[start]["id"])
-	# 		start = start + 10
-	# 		if start > len(template)-1:
-	# 			break;
-
-	# 	print(start, "End")
