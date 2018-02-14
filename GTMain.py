@@ -114,7 +114,7 @@ class App:
 				if indentify["ACK"]:
 					cmd = '{ "command": "auth", "message": "Acknowledge Finger.", "id": "'+str(indentify["Parameter"])+'" , "type": "true"}'
 				else:
-					cmd = '{ "command": "auth", "message": "'+indentify["Parameter"]+'", "type": "true" }'
+					cmd = '{ "command": "auth", "message": "'+indentify["Parameter"]+'", "type": "false" }'
 				ws.send(cmd)
 				print(indentify)
 				self.sensor.LED(False)
