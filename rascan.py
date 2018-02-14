@@ -80,6 +80,7 @@ class Rascan:
 			self.initialize()
 
 		if resp == "NRS":
+			print(templates)
 			cmd = json.loads(templates["message"])
 			self.app.sensor.LED(False)
 			print("Enrollment Starting")
