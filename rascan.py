@@ -69,6 +69,9 @@ class Rascan:
 					threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=(self.ws, )).start()
 
 		if resp == "run_scan":
+			self.app.stopScan = True
+			time.sleep(4)
+			self.app.stopScan = False
 			print("Check Starting")
 			threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=(self.ws, )).start()
 
