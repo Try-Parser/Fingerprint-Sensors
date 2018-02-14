@@ -105,16 +105,18 @@ class App:
 		self.sensor.LED(False)
 		print("Enroll terminitation.")
 
-	def scan(self):
+	def scan(self, ws):
 		while not self.stopScan:
 			self.sensor.LED(True)
 			if self.__capture_the_lights__():
 				indentify = self.sensor.security()
+				ws.send('{ "command": "auth", "message": "'+str(indentify)+'"}')
 				print(indentify)
-				self.sensor.LED(True)
-			else:
 				self.sensor.LED(False)
+			else:
 				break;
+
+		self.sensor.LED(False)
 
 	def delete(self, tempId):
 		de = self.sensor.rmById(tempId)

@@ -44,7 +44,7 @@ class Rascan:
 				time.sleep(4)
 				self.app.stopScan = False
 				print("Check Starting")
-				threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=()).start()
+				threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=(self.ws, )).start()
 			else:
 				if templates["success"] == True and len(resp["results"]) > 0:
 					self.sth.append(
@@ -60,7 +60,7 @@ class Rascan:
 					self.ctr += 1
 					if resp["from"] == resp["total"]-1:
 						print("Check Starting")
-						threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=()).start()
+						threading.Thread(name=str(uuid.uuid4()), target=self.app.scan, args=(self.ws, )).start()
 					else:
 						print(resp["from"])
 						print(resp["total"]-1)
