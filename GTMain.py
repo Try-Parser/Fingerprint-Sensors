@@ -153,5 +153,5 @@ class App:
 		if not stresponse[0]["ACK"] and not stresponse[1]["ACK"]:
 			ws.send('{ "command": "error",  "message": "'+stresponse[0]["Parameter"]+'", "id":"'+str(tempID)+'" }')
 
-		print("setTmplate Response Below)
+		print("setTmplate Response Below")
 		print(stresponse)
