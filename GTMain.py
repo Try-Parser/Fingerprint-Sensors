@@ -110,7 +110,12 @@ class App:
 			self.sensor.LED(True)
 			if self.__capture_the_lights__():
 				indentify = self.sensor.security()
-				ws.send('{ "command": "auth", "message": "'+str(indentify)+'"}')
+				cmd = ''
+				if indentify["ACK"]:
+					cmd = '{ "command": "auth", "message": "Acknowledge Finger.", "id": "'+str(indentify["Parameter"])+'" , "type": "true"}'
+				else:
+					cmd = '{ "command": "auth", "message": "'+indentify["Parameter"]+'", "type": "true" }'
+				ws.send()
 				print(indentify)
 				self.sensor.LED(False)
 			else:
