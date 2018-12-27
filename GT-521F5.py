@@ -1,6 +1,7 @@
 import serial
 import time
 import struct
+import RPi.GPIO as GPIO
 
 global ser
 
@@ -15,6 +16,24 @@ CMD_Code_2 = 0xAA
 
 ser = serial.Serial('/dev/ttyAMA0', baudrate=9600, timeout=2)
 
+
+GPIO.setmode(GPIO.BCM)
+INPUT_PIN = 17
+INPUT_PIN2 = 18
+GPIO.setup(INPUT_PIN, GPIO.IN)
+GPIO.setup(INPUT_PIN, GPIO.IN)
+
+while True:
+	input1 = GPIO.input(INPUT_PIN)
+	print(input1)
+	input2 = GPIO.input(INPUT_PIN2)
+	print(input2)
+
+	if input1 and input2:
+		break;
+
+
+time.sleep(1)
 cmd = 0x22
 ID = 1
 deviceID = 0x01
@@ -81,3 +100,4 @@ if result:
 	rxPacket = ser.read(1+1+2+498+2)
 	ser.timeout = 5
 	print (rxPacket)
+
