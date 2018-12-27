@@ -21,7 +21,7 @@ GPIO.setmode(GPIO.BCM)
 INPUT_PIN = 17
 INPUT_PIN2 = 18
 GPIO.setup(INPUT_PIN, GPIO.IN)
-GPIO.setup(INPUT_PIN, GPIO.IN)
+GPIO.setup(INPUT_PIN2, GPIO.IN)
 
 while True:
 	input1 = GPIO.input(INPUT_PIN)
