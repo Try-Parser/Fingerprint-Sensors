@@ -25,9 +25,9 @@ GPIO.setup(INPUT_PIN2, GPIO.IN)
 
 while True:
 	input1 = GPIO.input(INPUT_PIN)
-	print(input1)
+	print(str(input1) + " INPUT PIN")
 	input2 = GPIO.input(INPUT_PIN2)
-	print(input2)
+	print(str(input2) + " INPUT PIN2")
 
 	if input1 and input2:
 		break;
