@@ -19,7 +19,7 @@ ser = serial.Serial('/dev/ttyAMA0', baudrate=9600, timeout=2)
 GPIO.setmode(GPIO.BCM)
 INPUT_PIN2 = 18
 
-GPIO.setup(INPUT_PIN2, GPIO.OUT)
+GPIO.setup(INPUT_PIN2, GPIO.IN)
 
 def inputLow(channel):
 	print(channel)
