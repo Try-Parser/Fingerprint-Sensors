@@ -23,11 +23,11 @@ INPUT_PIN2 = 18
 GPIO.setup(INPUT_PIN, GPIO.OUT)
 GPIO.setup(INPUT_PIN2, GPIO.OUT)
 
-GPIO.add_event_detect(INPUT_PIN2, GPIO.FALLING, callback=inputLow, bouncetime=200);
-
 def inputLow(channel):
 	print(channel)
 	print('0')
+
+GPIO.add_event_detect(INPUT_PIN2, GPIO.FALLING, callback=inputLow, bouncetime=200);
 
 while True:
 	print('3.3')
