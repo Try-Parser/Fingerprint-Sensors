@@ -17,17 +17,15 @@ CMD_Code_2 = 0xAA
 ser = serial.Serial('/dev/ttyAMA0', baudrate=9600, timeout=2)
 
 GPIO.setmode(GPIO.BCM)
-INPUT_PIN = 17
 INPUT_PIN2 = 18
 
-GPIO.setup(INPUT_PIN, GPIO.OUT)
 GPIO.setup(INPUT_PIN2, GPIO.OUT)
 
 def inputLow(channel):
 	print(channel)
 	print('0')
 
-GPIO.add_event_detect(INPUT_PIN2, GPIO.FALLING, callback=inputLow, bouncetime=200);
+GPIO.add_event_detect(INPUT_PIN2, GPIO.FALLING, callback=inputLow);
 
 while True:
 	print('3.3')
