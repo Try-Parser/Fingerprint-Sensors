@@ -26,12 +26,12 @@ GPIO.setup(INPUT_PIN2, GPIO.OUT)
 GPIO.add_event_detect(INPUT_PIN2, GPIO.FALLING, callback=inputLow, bouncetime=200);
 
 def inputLow(channel):
-	print(channel);
-    print('0');
+	print(channel)
+	print('0')
 
 while True:
-	print('3.3');
-	sleep(1);  
+	print('3.3')
+	sleep(1)
 
 
 # time.sleep(1)
